@@ -1,0 +1,80 @@
+﻿  ThreeDeeApp.cpp
+c:\Cinder\include\cinder/Font.h(128): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/Gizmo/SolarizedTheme.h(117): warning C4305: 'argument' : truncation from 'double' to 'float'
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/Gizmo/SolarizedTheme.h(119): warning C4305: 'argument' : truncation from 'double' to 'float'
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/Gizmo/SolarizedTheme.h(122): warning C4244: 'argument' : conversion from 'double' to 'uint8_t', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/gizmo/parts/RadialGridPart.h(23): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/gizmo/parts/RadialGridPart.h(23): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/gizmo/parts/RadialGridPart.h(61): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/gizmo/GizmoPane.h(18): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/gizmo/GizmoPane.h(18): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/cinderpane/Interface.h(127): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\time.inl(112) : see declaration of 'localtime'
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/cinderpane/Interface.h(260): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+C:\Users\aalpern\Documents\My Dropbox\Gizmo\include\zugster/cinderpane/Interface.h(260): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(224): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(224): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(226): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(226): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(229): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(229): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+..\src\ThreeDeeApp.cpp(263): warning C4305: 'argument' : truncation from 'double' to 'float'
+..\src\ThreeDeeApp.cpp(263): warning C4305: 'argument' : truncation from 'double' to 'float'
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(333): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+          ..\src\ThreeDeeApp.cpp(64) : see reference to function template instantiation 'boost::shared_ptr<T> boost::make_shared<zugster::gizmo::RadialLinesPart,float,float,int,int,int>(const A1 &,const A2 &,const A3 &,const A4 &,const A5 &)' being compiled
+          with
+          [
+              T=zugster::gizmo::RadialLinesPart,
+              A1=float,
+              A2=float,
+              A3=int,
+              A4=int,
+              A5=int
+          ]
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(333): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(297): warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
+          ..\src\ThreeDeeApp.cpp(138) : see reference to function template instantiation 'boost::shared_ptr<T> boost::make_shared<zugster::gizmo::GradientCirclePart,double,double,cinder::ColorAf,cinder::ColorAT<float>>(const A1 &,const A2 &,const A3 &,const A4 &)' being compiled
+          with
+          [
+              T=zugster::gizmo::GradientCirclePart,
+              A1=double,
+              A2=double,
+              A3=cinder::ColorAf,
+              A4=cinder::ColorAT<float>
+          ]
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(297): warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(261): warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
+          ..\src\ThreeDeeApp.cpp(144) : see reference to function template instantiation 'boost::shared_ptr<T> boost::make_shared<zugster::gizmo::RadialLinesPart,double,double,int>(const A1 &,const A2 &,const A3 &)' being compiled
+          with
+          [
+              T=zugster::gizmo::RadialLinesPart,
+              A1=double,
+              A2=double,
+              A3=int
+          ]
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(261): warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(297): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+          ..\src\ThreeDeeApp.cpp(160) : see reference to function template instantiation 'boost::shared_ptr<T> boost::make_shared<zugster::gizmo::RegularPolygonPart,int,int,bool,bool>(const A1 &,const A2 &,const A3 &,const A4 &)' being compiled
+          with
+          [
+              T=zugster::gizmo::RegularPolygonPart,
+              A1=int,
+              A2=int,
+              A3=bool,
+              A4=bool
+          ]
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(261): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+          ..\src\ThreeDeeApp.cpp(168) : see reference to function template instantiation 'boost::shared_ptr<T> boost::make_shared<zugster::gizmo::RadialLinesPart,int,int,int>(const A1 &,const A2 &,const A3 &)' being compiled
+          with
+          [
+              T=zugster::gizmo::RadialLinesPart,
+              A1=int,
+              A2=int,
+              A3=int
+          ]
+C:\Cinder\boost\boost/smart_ptr/make_shared.hpp(261): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     Creating library C:\Users\aalpern\Documents\My Dropbox\Gizmo\samples\ThreeDee\vc10\Release\ThreeDee.lib and object C:\Users\aalpern\Documents\My Dropbox\Gizmo\samples\ThreeDee\vc10\Release\ThreeDee.exp
+  Generating code
+  Finished generating code
+  ThreeDee.vcxproj -> C:\Users\aalpern\Documents\My Dropbox\Gizmo\samples\ThreeDee\vc10\Release\ThreeDee.exe
