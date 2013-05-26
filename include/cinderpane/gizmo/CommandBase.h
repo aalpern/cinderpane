@@ -17,7 +17,7 @@ namespace cinderpane {
 
 		class CommandBase
 			: public IPart
-            , public cinderpane::cinderpane::PositionableBase
+            , public cinderpane::core::PositionableBase
 		{
 		  public:
 			CommandBase() {}

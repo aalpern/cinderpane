@@ -24,7 +24,7 @@ namespace cinderpane {
 		/// then just blitted to the screen as necessary.
 
 		class GizmoPane
-			: public cinderpane::cinderpane::TexturePane
+			: public cinderpane::core::TexturePane
 		{
 		  public:
 			GizmoPane(double x, double y, double h, double w, GizmoRef gizmo)

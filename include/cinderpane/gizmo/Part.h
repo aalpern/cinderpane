@@ -36,7 +36,7 @@ namespace cinderpane {
 		struct IPart
 			: public virtual IRenderable
 			, public virtual IPersistable
-			, public virtual cinderpane::cinderpane::IPositionable
+			, public virtual cinderpane::core::IPositionable
 		{
 			virtual ~IPart() {}
 
