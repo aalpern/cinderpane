@@ -1,25 +1,21 @@
 #include <iostream>
 #include <boost/lexical_cast.hpp>
-#include "cinder/app/App.h"
-#include "cinder/CinderMath.h"
+#include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
+#include "cinder/CinderMath.h"
 #include "cinder/gl/Texture.h"
 #include "cinder/cairo/Cairo.h"
 #include "cinder/Rand.h"
-#include "zugster/cinderpane/Interface.h"
-#include "zugster/gizmo/API.h"
-#include "zugster/cinder/App.h"
+#include "cinderpane/core/Interface.h"
+#include "cinderpane/gizmo/API.h"
+#include "cinderpane/ext/MovieApp.h"
 
-#pragma comment(lib, "cairo-static.lib")
-
-using namespace cinder;
-using namespace cinder::app;
-using namespace zugster::gizmo;
-using namespace zugster::cinderext;
-using namespace zugster::cinderpane;
-using boost::shared_ptr;
-using boost::make_shared;
-using boost::dynamic_pointer_cast;
+using namespace ci;
+using namespace ci::app;
+using namespace std;
+using namespace cinderpane::gizmo;
+using namespace cinderpane::ext;
+using namespace cinderpane::core;
 using boost::lexical_cast;
 
 static const float WIDTH  = 1280.0f;
@@ -47,38 +43,38 @@ void increment(Vec2f &pos) { pos.y += ( height + spacing ); }
 
 GizmoRef make_grids_column()
 {
-	GizmoRef c = make_shared<Gizmo>(64, 0);	
+	GizmoRef c = make_shared<Gizmo>(64, 0);
 	Vec2f pos(0, y_start);
 
 	c->push_back(normalLineCommand);
-	
+
 	// Rectangle
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   true, true, RectangleNormal));
 	increment(pos);
 	c->push_back(thinLineCommand);
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   false, false, RectangleNormal));
 	c->back()->setDisplayState(IPart::DisplaySecondary);
 
 	// Round Rect
 	c->push_back(normalLineCommand);
 	increment(pos);
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   true, false, RectangleRound));
 	c->back()->setDisplayState(IPart::DisplayDisabled);
 	increment(pos);
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   true, true, RectangleRound));
-	
+
 	// Curve rect
 	increment(pos);
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   true, true, RectangleCurve));
 	c->back()->setDisplayState(IPart::DisplayOK);
 
 	increment(pos);
-	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4, 
+	c->push_back(make_shared<GridPart>(pos, Vec2f(width, height), 8, 4,
 									   false, true, RectangleCurve));
 	c->back()->setDisplayState(IPart::DisplayCritical);
 
@@ -106,7 +102,7 @@ GizmoRef make_arcs_column()
 {
 	GizmoRef c = make_shared<Gizmo>(196, 0);
     Vec2f pos(0, y_start);
-    
+
 	// Solid arc
     c->push_back(make_shared<ArcPart>(pos, radius, 8, 220, 30));
 
@@ -115,11 +111,11 @@ GizmoRef make_arcs_column()
     c->push_back(make_shared<FilledArcPart>(pos, radius, 8, 220, 30));
 
 	// Solid segmented arc
-	increment(pos);    
+	increment(pos);
     c->push_back(make_shared<SegmentedArcPart>(pos, radius, 8, 6, 15));
 
 	// Filled segmented arc
-	increment(pos);    
+	increment(pos);
 	c->push_back(saveCommand);
 	c->push_back(thinLineCommand);
     c->push_back(make_shared<SegmentedFilledArcPart>(pos, radius, 12, 12, 16));
@@ -127,7 +123,7 @@ GizmoRef make_arcs_column()
 	c->push_back(restoreCommand);
 
 	// Multiple rotating arcs
-	increment(pos);    
+	increment(pos);
 	c->push_back(make_shared<ArcPart>(pos, radius, 4, 0, 30));
 	c->back()->setRotationSpeed(30);
 	c->push_back(make_shared<ArcPart>(pos, radius, 4, 0, 30));
@@ -158,7 +154,7 @@ GizmoRef make_arcs_column()
 	c->back()->setRotationSpeed(-12);
 	c->push_back(make_shared<ArcPart>(pos, (radius / 3) - 2, 1, 90, 270));
 	c->back()->setRotationSpeed(11);
-	
+
 	increment(pos);
 	c->push_back(make_shared<CirclePart>(pos, radius, true, true));
 	increment(pos);
@@ -170,7 +166,7 @@ GizmoRef make_arcs_column()
 	increment(pos);
 	c->push_back(make_shared<RectanglePart>(pos, Vec2f(width, height), RectangleRound, true, true));
 	// c->push_back(make_shared<TextPart>(pos, "RectangleRound"));
-	
+
 	return c;
 }
 
@@ -191,7 +187,7 @@ GizmoRef make_shapes_column()
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 4, true, true));
 	c->back()->setDisplayState(IPart::DisplaySecondary);
     c->back()->setRotation(45);
-    
+
 	increment(pos);
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 4, true, true));
 	c->back()->setDisplayState(IPart::DisplayHighlight);
@@ -201,7 +197,7 @@ GizmoRef make_shapes_column()
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 5, true, true));
 	c->back()->setDisplayState(IPart::DisplayOK);
     c->back()->setRotation(270);
-    
+
 	increment(pos);
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 5, true, true));
 	c->back()->setDisplayState(IPart::DisplayWarning);
@@ -211,13 +207,13 @@ GizmoRef make_shapes_column()
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 6, true, true));
 	c->back()->setDisplayState(IPart::DisplayWarning);
     c->back()->setRotation(270);
-    
+
 	increment(pos);
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 6, true, true));
 	c->back()->setDisplayState(IPart::DisplaySubCritical);
     c->back()->setRotation(270);
     c->back()->setRotationSpeed(-12);
-    
+
 	// Stop sign
 	increment(pos);
 	c->push_back(make_shared<RegularPolygonPart>(pos, radius, 8, true, true));
@@ -228,7 +224,7 @@ GizmoRef make_shapes_column()
     c->back()->setRotation(22.5);
 	c->push_back(make_shared<TextPart>(pos, "STOP", 18.0));
 	c->back()->setDisplayState(IPart::DisplayWarning);
-	
+
 	return c;
 }
 
@@ -270,7 +266,7 @@ GizmoRef make_lines_column()
 	c->back()->setDisplayState(IPart::DisplayWarning);
 	c->push_back(restoreCommand);
 
-	
+
 	// A set of radial lines restrict to a subset of angles
 	increment(pos);
 	c->push_back(saveCommand);
@@ -284,16 +280,16 @@ GizmoRef make_miscellany_column()
 {
     GizmoRef c = make_shared<Gizmo>(580, 0);
     Vec2f pos(0, y_start);
-    
+
     c->push_back(make_shared<GradientCirclePart>(pos, radius, radius, solarized::red, ColorA::white()));
 	increment(pos);
-    c->push_back(make_shared<GradientCirclePart>(pos, radius, radius / 2, ColorA(0.0f, 0.9f, 0.8f, 0.5f), 
+    c->push_back(make_shared<GradientCirclePart>(pos, radius, radius / 2, ColorA(0.0f, 0.9f, 0.8f, 0.5f),
 												 ColorA(0,0,0,0)));
 	increment(pos);
-    c->push_back(make_shared<GradientCirclePart>(pos, radius, radius / 2, 
-												 ColorA(1.0f, 0.5f, 0.5f, 0.8f), 
+    c->push_back(make_shared<GradientCirclePart>(pos, radius, radius / 2,
+												 ColorA(1.0f, 0.5f, 0.5f, 0.8f),
 												 ColorA(0,0,0,0)));
-    c->push_back(make_shared<GradientCirclePart>(pos, radius / 2, radius / 2, 
+    c->push_back(make_shared<GradientCirclePart>(pos, radius / 2, radius / 2,
 												 ColorA(0,0,0,0),
 												 ColorA(1.0f, 0.5f, 0.5f, 0.8f)));
 
@@ -303,18 +299,18 @@ GizmoRef make_miscellany_column()
 GizmoRef make_radial_progress_indicator()
 {
     GizmoRef g = make_shared<Gizmo>(836, 128);
-    
+
     float increment = 16;
-    
+
     // g->push_back(make_shared<CirclePart>(8, true, true));
-    
+
     for ( int i = 2; i <= 6; i++ )
     {
         g->push_back(make_shared<RadialLinesPart>(i * increment, 1, 48, 0, 360));
         g->push_back(make_shared<ArcPart>((i * increment) + 3, 8, 0, 50 * i));
         g->back()->rotate(-90);
     }
-    
+
     return g;
 }
 
@@ -332,7 +328,7 @@ void custom1(GizmoContext &ctx)
     ::memset(values, 0, sizeof(double) * value_count);
 	for ( int i = 0; i < value_count; i++ )
 		values[i] = r.nextFloat(0.0f, 0.99f);
-	
+
 	ctx.save();
 	ctx.Cairo.setLineWidth(4);
 	radial_bar_chart(ctx.Cairo, ctx.Position, 48, 96, values, value_count);
@@ -343,12 +339,12 @@ void custom1(GizmoContext &ctx)
 GizmoRef make_custom_1()
 {
     GizmoRef g = make_shared<Gizmo>(836, 384);
-    
+
 	g->push_back(make_shared<CirclePart>(96, true, true));
 	g->push_back(make_shared<CirclePart>(28, true, true));
 	g->back()->setDisplayState(IPart::DisplayDisabled);
 	g->push_back(make_shared<CustomFn>(custom1));
-    
+
     return g;
 }
 
@@ -360,7 +356,7 @@ GizmoRef make_fancy_compass(double radius)
 	radius -= 12;
 	GizmoRef g = make_shared<Gizmo>(1092, 128);
 	g->push_back(saveCommand);
-	
+
 	// A subtle gradient around the edge
 	g->push_back(make_shared<GradientCirclePart>(radius, radius / 2, solarized::blue, ColorA(0, 0, 0, 0)));
 	g->push_back(make_shared<SetLinewidth>(2.0));
@@ -372,7 +368,7 @@ GizmoRef make_fancy_compass(double radius)
 	g->push_back(make_shared<RadialLinesPart>(radius, radius / 16,  48));
 
 	// Add some dark circles in the center
-	
+
 	g->push_back(make_shared<CirclePart>(radius / 3));
 	g->back()->setDisplayState(IPart::DisplayDisabled);
 	g->push_back(make_shared<CirclePart>(radius / 2));
@@ -386,7 +382,7 @@ GizmoRef make_fancy_compass(double radius)
 	// the perimeter via PerimeterPart
 	PartRef indicator = make_shared<RegularPolygonPart>(9, 3, true, true);
 	indicator->setDisplayState(IPart::DisplaySubCritical);
-	g->push_back(make_shared<PerimeterPart>(radius - 20, 
+	g->push_back(make_shared<PerimeterPart>(radius - 20,
 											indicator,
 											true));
 	g->back()->setRotation(220);
@@ -406,7 +402,7 @@ GizmoRef make_fancy_compass(double radius)
 //	g->back()->setDisplayState(IPart::DisplayWarning);
 
 	g->push_back(restoreCommand);
-	
+
 	return g;
 }
 
@@ -443,18 +439,14 @@ GizmoRef make_framistat(float scale = 2.5)
 	return g;
 }
 
-
 //=============================================================================
-// Radial App
+// App
 //=============================================================================
 
-class BasicGizmosApp : public AppBasic
-{
+class BasicGizmosApp : public AppNative {
   public:
-    virtual ~BasicGizmosApp() {}
-    
 	void setup();
-	void prepareSettings(Settings *settings);
+	void mouseDown( MouseEvent event );
 	void update();
 	void draw();
 
@@ -463,10 +455,9 @@ class BasicGizmosApp : public AppBasic
 	Interface m_interface;
 };
 
-void 
-BasicGizmosApp::setup()
+void BasicGizmosApp::setup()
 {
-	m_interface.setup(this);
+ 	m_interface.setup(this);
 	m_gizmos = make_shared<Gizmo>();
 
 	m_gizmos->push_back(make_grids_column());
@@ -485,25 +476,29 @@ BasicGizmosApp::setup()
 	gl::enableDepthWrite();
 }
 
-void 
+/*
+void
 BasicGizmosApp::prepareSettings(Settings *settings)
 {
 	settings->setWindowSize( (int)WIDTH, (int)HEIGHT );
 	settings->setFrameRate(  30.0f );
 	settings->setTitle("Gizmo Catalog");
 }
+*/
 
-void 
-BasicGizmosApp::update()
+void BasicGizmosApp::mouseDown( MouseEvent event )
+{
+}
+
+void BasicGizmosApp::update()
 {
 	m_interface.update();
 }
 
-void 
-BasicGizmosApp::draw()
+void BasicGizmosApp::draw()
 {
 	gl::clear();
 	m_interface.render();
 }
 
-CINDER_APP_BASIC( BasicGizmosApp, RendererGl )
+CINDER_APP_NATIVE( BasicGizmosApp, RendererGl )
