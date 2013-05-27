@@ -27,11 +27,12 @@ namespace cinderpane {
 
         /// @name Position
         /// @{
-        virtual void move(const Vec2f &offset)
+        virtual IPositionable* move(const Vec2f &offset)
         {
             Vec2f old = m_position;
             m_position += offset;
             onPositionChanged(m_position, old);
+            return this;
         }
 
         virtual Vec2f getPosition() const
@@ -39,24 +40,26 @@ namespace cinderpane {
             return m_position;
         }
 
-        virtual void setPosition(const Vec2f &position)
+        virtual IPositionable* setPosition(const Vec2f &position)
         {
             if ( m_position == position )
-                return;
+                return this;
 
             Vec2f old = m_position;
             m_position = position;
             onPositionChanged(position, old);
+            return this;
         }
         /// @}
 
         /// @name Size
         /// @{
-        virtual void morph(const Vec2f &offset)
+        virtual IPositionable* morph(const Vec2f &offset)
         {
             Vec2f old = m_size;
             m_size += offset;
             onSizeChanged(m_size, old);
+            return this;
         }
 
         virtual Vec2f getSize() const
@@ -64,13 +67,14 @@ namespace cinderpane {
             return m_size;
         }
 
-        virtual void setSize(const Vec2f &size)
+        virtual IPositionable* setSize(const Vec2f &size)
         {
             if ( m_size == size )
-                return;
+                return this;
             Vec2f old = m_size;
             m_size = size;
             onSizeChanged(size, old);
+            return this;
         }
 
         virtual Rectf getBounds() const
@@ -81,15 +85,18 @@ namespace cinderpane {
 
         /// @name Visibility
         /// @{
-        bool isVisible() const
+        virtual bool isVisible() const
         {
             return m_visible;
         }
 
-        void setVisible(bool visible)
+        virtual IPositionable* setVisible(bool visible)
         {
+            if ( m_visible == visible )
+                return this;
             m_visible = visible;
             onVisibilityChanged();
+            return this;
         }
         /// @}
 

@@ -93,7 +93,7 @@ namespace cinderpane {
 
         ~Interface() {}
 
-        void add(PaneRef pane)
+        Interface* add(PaneRef pane)
         {
             push_back(pane);
 
@@ -104,6 +104,8 @@ namespace cinderpane {
             MouseListenerRef mouseListener = dynamic_pointer_cast<IMouseListener>(pane);
             if ( mouseListener )
                 m_dispatcher.add(mouseListener);
+
+            return this;
         }
 
         bool isVisible() const
@@ -111,14 +113,37 @@ namespace cinderpane {
             return m_visible;
         }
 
-        void setVisible(bool value)
+        Interface* setVisible(bool value)
         {
             if ( m_visible == value )
-                return;
+                return this;
             m_visible = value;
+            return this;
         }
 
-        void screenshot()
+        bool isUsingGlow() const
+        {
+            return m_useGlow;
+        }
+
+        Interface* setUseGlow(bool value)
+        {
+            m_useGlow = value;
+            return this;
+        }
+
+        bool isUsingFramebuffer() const
+        {
+            return m_useFrameBuffer;
+        }
+
+        Interface* setUsingFramebuffer(bool value)
+        {
+            m_useFrameBuffer = value;
+            return this;
+        }
+
+        Interface* screenshot()
         {
             time_t t;
             ::time(&t);
@@ -131,6 +156,7 @@ namespace cinderpane {
                      << cinder::app::App::get()->getSettings().getTitle() << "-" << buffer << ".png";
 
             cinder::writeImage( filepath.str(), cinder::app::copyWindowSurface(), cinder::ImageTarget::Options(), "png" );
+            return this;
         }
 
         bool onKeyDown(cinder::app::KeyEvent event)
@@ -158,7 +184,7 @@ namespace cinderpane {
             return false;
         }
 
-        void setup(cinder::app::AppBasic *app)
+        Interface* setup(cinder::app::AppBasic *app)
         {
             m_app = app;
 
@@ -195,21 +221,24 @@ namespace cinderpane {
             } catch ( const std::exception &ex ) {
                 std::cout << ex.what() << std::endl;
             }
+            return this;
         }
 
-        void resize(int width, int height)
+        Interface* resize(int width, int height)
         {
             m_framebuffer        = cinder::gl::Fbo(width, height, m_format);
             m_framebuffer_shaded = cinder::gl::Fbo(width, height, m_format);
+            return this;
         }
 
-        void update()
+        Interface* update()
         {
             if ( !m_visible )
-                return;
+                return this;
             for ( auto pane : m_panes ) {
                 pane->updatePane();
             }
+            return this;
         }
 
         void render()
@@ -228,9 +257,9 @@ namespace cinderpane {
             }
         }
 
-        CINDERPANE_DELEGATE_VECTOR(PaneVector, m_panes)
+        CINDERPANE_DELEGATE_VECTOR(PaneVector, m_panes);
 
-        private:
+      private:
         void render_framebuffer()
         {
             cinder::gl::SaveFramebufferBinding binding;
