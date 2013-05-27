@@ -8,19 +8,19 @@
 /// @{
 
 namespace cinderpane {
-	namespace gizmo {
+  namespace gizmo {
 
-		/// An interface for any class which can be rendered to a GizmoContext, either
-		/// as a whole or a part of a parent gizmo.
-		struct IRenderable
-		{
-			virtual ~IRenderable() {}
+    /// An interface for any class which can be rendered to a GizmoContext, either
+    /// as a whole or a part of a parent gizmo.
+    struct IRenderable
+    {
+        virtual ~IRenderable() {}
 
-			virtual void updateGizmo() = 0;
-			virtual void renderGizmo(GizmoContext &context) = 0;
-		};
+        virtual void updateGizmo() = 0;
+        virtual void renderGizmo(GizmoContext &context) = 0;
+    };
 
-	}
+  }
 } // end namespace cinderpane::gizmo
 
 /// @}

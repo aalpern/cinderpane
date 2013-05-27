@@ -7,16 +7,16 @@
 /// @{
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		using cinder::Vec2f;
-		using cinder::Rectf;
-		using cinder::Surface;
+    using cinder::Vec2f;
+    using cinder::Rectf;
+    using cinder::Surface;
 
-		struct IPane;
-		typedef shared_ptr<IPane>    PaneRef;
-		typedef std::vector<PaneRef> PaneVector;
-	}
+    struct IPane;
+    typedef shared_ptr<IPane>    PaneRef;
+    typedef std::vector<PaneRef> PaneVector;
+  }
 }
 
 /// @}

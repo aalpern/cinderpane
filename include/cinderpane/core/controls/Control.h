@@ -1,16 +1,16 @@
 #pragma once
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		class Control
-			: public PositionableBase
-		{
-		  public:
-			virtual void draw()
-			{
-			}
-		};
+    class Control
+        : public PositionableBase
+    {
+      public:
+        virtual void draw()
+        {
+        }
+    };
 
-	}
+  }
 }

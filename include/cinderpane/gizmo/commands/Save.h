@@ -5,30 +5,30 @@
 /// @{
 
 namespace cinderpane {
-	namespace gizmo {
+  namespace gizmo {
 
-		class ContextSave : public CommandBase
-		{
-		  public:
-			ContextSave() {}
+    class ContextSave : public CommandBase
+    {
+      public:
+        ContextSave() {}
 
-			virtual void renderGizmo(GizmoContext &ctx)
-			{
-				ctx.save();
-			}
+        virtual void renderGizmo(GizmoContext &ctx)
+        {
+            ctx.save();
+        }
 
-			virtual void loadXML(const cinder::XmlTree &element,
-								 const PartFactoryRef &factory)
-			{
-			}
+        virtual void loadXML(const cinder::XmlTree &element,
+                             const PartFactoryRef &factory)
+        {
+        }
 
-			virtual void storeXML(std::ostream &os) const
-			{
-				xmlWriteTag(os, "Save");
-			}
-		};
+        virtual void storeXML(std::ostream &os) const
+        {
+            xmlWriteTag(os, "Save");
+        }
+    };
 
-	}
+  }
 }
 
 /// @}
