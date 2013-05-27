@@ -6,43 +6,43 @@
 /// @{
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		class TextLayoutPane
-			: public TexturePane
-		{
-		  public:
-			TextLayoutPane() {}
-			TextLayoutPane(const Vec2f &position)
-				: TexturePane(position) {}
-			TextLayoutPane(const cinder::TextLayout &text)
-				: m_text(text) {}
-			TextLayoutPane(const Vec2f &position, const cinder::TextLayout &text)
-				: TexturePane(position), m_text(text) {}
+    class TextLayoutPane
+        : public TexturePane
+    {
+      public:
+        TextLayoutPane() {}
+        TextLayoutPane(const Vec2f &position)
+            : TexturePane(position) {}
+        TextLayoutPane(const cinder::TextLayout &text)
+            : m_text(text) {}
+        TextLayoutPane(const Vec2f &position, const cinder::TextLayout &text)
+            : TexturePane(position), m_text(text) {}
 
-			virtual ~TextLayoutPane() {}
+        virtual ~TextLayoutPane() {}
 
-            cinder::TextLayout& text()
-			{
-				return m_text;
-			}
+        cinder::TextLayout& text()
+        {
+            return m_text;
+        }
 
-			const cinder::TextLayout& text() const
-			{
-				return m_text;
-			}
+        const cinder::TextLayout& text() const
+        {
+            return m_text;
+        }
 
-			virtual void updatePane()
-			{
-				if ( !m_texture )
-					m_texture = m_text.render(true);
-			}
+        virtual void updatePane()
+        {
+            if ( !m_texture )
+                m_texture = m_text.render(true);
+        }
 
-		  private:
-            cinder::TextLayout m_text;
-		};
+      private:
+        cinder::TextLayout m_text;
+    };
 
-	}
+  }
 }
 
 /// @}

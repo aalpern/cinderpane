@@ -31,109 +31,109 @@
 	return false
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		using std::cout;
-		using std::endl;
+    using std::cout;
+    using std::endl;
 
-		class EventDispatcher
-			: public IMouseListener
-			, public IKeyListener
-		{
-            typedef std::list<MouseListenerRef> mouse_container;
-			typedef std::list<KeyListenerRef>   key_container;
-			typedef std::list<TouchListenerRef> touch_container;
+    class EventDispatcher
+        : public IMouseListener
+        , public IKeyListener
+    {
+        typedef std::list<MouseListenerRef> mouse_container;
+        typedef std::list<KeyListenerRef>   key_container;
+        typedef std::list<TouchListenerRef> touch_container;
 
-		  public:
-			EventDispatcher() {}
-			~EventDispatcher() {}
+      public:
+        EventDispatcher() {}
+        ~EventDispatcher() {}
 
-			void add(KeyListenerRef k)
-			{
-				m_keys.push_back(k);
-			}
+        void add(KeyListenerRef k)
+        {
+            m_keys.push_back(k);
+        }
 
-			void add(MouseListenerRef m)
-			{
-				m_mice.push_back(m);
-			}
+        void add(MouseListenerRef m)
+        {
+            m_mice.push_back(m);
+        }
 
-			void add(TouchListenerRef t)
-			{
-				m_touches.push_back(t);
-			}
+        void add(TouchListenerRef t)
+        {
+            m_touches.push_back(t);
+        }
 
-			void remove(KeyListenerRef k)
-			{
-				m_keys.remove(k);
-			}
+        void remove(KeyListenerRef k)
+        {
+            m_keys.remove(k);
+        }
 
-			void remove(MouseListenerRef m)
-			{
-				m_mice.remove(m);
-			}
+        void remove(MouseListenerRef m)
+        {
+            m_mice.remove(m);
+        }
 
-			void remove(TouchListenerRef t)
-			{
-				m_touches.remove(t);
-			}
+        void remove(TouchListenerRef t)
+        {
+            m_touches.remove(t);
+        }
 
-			virtual bool onMouseDown( cinder::app::MouseEvent event )
-			{
-				CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDown);
-			}
+        virtual bool onMouseDown( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDown);
+        }
 
-			virtual bool onMouseUp( cinder::app::MouseEvent event )
-			{
-				CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseUp);
-			}
+        virtual bool onMouseUp( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseUp);
+        }
 
-			virtual bool onMouseWheel( cinder::app::MouseEvent event )
-			{
-				CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseWheel);
-			}
+        virtual bool onMouseWheel( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseWheel);
+        }
 
-			virtual bool onMouseMove( cinder::app::MouseEvent event )
-			{
-				CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseMove);
-			}
+        virtual bool onMouseMove( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseMove);
+        }
 
-			virtual bool onMouseDrag( cinder::app::MouseEvent event )
-			{
-				CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDrag);
-			}
+        virtual bool onMouseDrag( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDrag);
+        }
 
-			virtual bool onKeyDown( cinder::app::KeyEvent event )
-			{
-				CINDERPANE_DISPATCH_EVENT(key_container, m_keys, onKeyDown);
-			}
+        virtual bool onKeyDown( cinder::app::KeyEvent event )
+        {
+            CINDERPANE_DISPATCH_EVENT(key_container, m_keys, onKeyDown);
+        }
 
-			virtual bool onKeyUp( cinder::app::KeyEvent event )
-			{
-				CINDERPANE_DISPATCH_EVENT(key_container, m_keys, onKeyUp);
-			}
+        virtual bool onKeyUp( cinder::app::KeyEvent event )
+        {
+            CINDERPANE_DISPATCH_EVENT(key_container, m_keys, onKeyUp);
+        }
 
-			virtual bool onTouchesBegan( cinder::app::TouchEvent event )
-			{
-				return false;
-			}
+        virtual bool onTouchesBegan( cinder::app::TouchEvent event )
+        {
+            return false;
+        }
 
-			virtual bool onTouchesMoved( cinder::app::TouchEvent event )
-			{
-				return false;
-			}
+        virtual bool onTouchesMoved( cinder::app::TouchEvent event )
+        {
+            return false;
+        }
 
-			virtual bool onTouchesEnded( cinder::app::TouchEvent event )
-			{
-				return false;
-			}
+        virtual bool onTouchesEnded( cinder::app::TouchEvent event )
+        {
+            return false;
+        }
 
-		  private:
-			mouse_container m_mice;
-			key_container   m_keys;
-			touch_container m_touches;
-		};
-	}
+      private:
+        mouse_container m_mice;
+        key_container   m_keys;
+        touch_container m_touches;
+    };
+  }
 }
 
 /// @}

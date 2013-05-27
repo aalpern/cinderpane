@@ -171,21 +171,21 @@ namespace cinderpane {
             m_framebuffer_shaded = cinder::gl::Fbo(app->getWindowWidth(), app->getWindowHeight(), m_format);
 
             /*
-             TODO: events have change in cinder 0.8.5
-            app->registerKeyDown(      this,          &Interface::onKeyDown);
-            app->registerResize(       this,          &Interface::onResize);
-            app->registerMouseDown(    &m_dispatcher, &EventDispatcher::onMouseDown);
-            app->registerMouseUp(      &m_dispatcher, &EventDispatcher::onMouseUp);
-            app->registerMouseWheel(   &m_dispatcher, &EventDispatcher::onMouseWheel);
-            app->registerMouseMove(    &m_dispatcher, &EventDispatcher::onMouseMove);
-            app->registerMouseDrag(    &m_dispatcher, &EventDispatcher::onMouseDown);
-            app->registerKeyDown(      &m_dispatcher, &EventDispatcher::onKeyDown);
-            app->registerKeyUp(        &m_dispatcher, &EventDispatcher::onKeyUp);
-            app->registerTouchesBegan( &m_dispatcher, &EventDispatcher::onTouchesBegan);
-            app->registerTouchesMoved( &m_dispatcher, &EventDispatcher::onTouchesMoved);
-            app->registerTouchesEnded( &m_dispatcher, &EventDispatcher::onTouchesEnded);
-*/
-            
+              TODO: events have change in cinder 0.8.5
+              app->registerKeyDown(      this,          &Interface::onKeyDown);
+              app->registerResize(       this,          &Interface::onResize);
+              app->registerMouseDown(    &m_dispatcher, &EventDispatcher::onMouseDown);
+              app->registerMouseUp(      &m_dispatcher, &EventDispatcher::onMouseUp);
+              app->registerMouseWheel(   &m_dispatcher, &EventDispatcher::onMouseWheel);
+              app->registerMouseMove(    &m_dispatcher, &EventDispatcher::onMouseMove);
+              app->registerMouseDrag(    &m_dispatcher, &EventDispatcher::onMouseDown);
+              app->registerKeyDown(      &m_dispatcher, &EventDispatcher::onKeyDown);
+              app->registerKeyUp(        &m_dispatcher, &EventDispatcher::onKeyUp);
+              app->registerTouchesBegan( &m_dispatcher, &EventDispatcher::onTouchesBegan);
+              app->registerTouchesMoved( &m_dispatcher, &EventDispatcher::onTouchesMoved);
+              app->registerTouchesEnded( &m_dispatcher, &EventDispatcher::onTouchesEnded);
+            */
+
             try {
 #ifdef _WIN32
                 m_glow_shader = cinder::gl::GlslProg(cinder::loadFile("passThru_vert.glsl"),
@@ -200,12 +200,12 @@ namespace cinderpane {
         }
 
         /*
-         TODO: Gone or moved in cinder 0.8.5?
-        bool onResize(cinder::app::ResizeEvent event)
-        {
-            return false;
-        }
-         */
+          TODO: Gone or moved in cinder 0.8.5?
+          bool onResize(cinder::app::ResizeEvent event)
+          {
+          return false;
+          }
+        */
 
         void update()
         {

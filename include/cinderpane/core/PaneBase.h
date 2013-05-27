@@ -9,30 +9,29 @@
 
 #include "cinderpane/core/Pane.h"
 
-
 /// @addtogroup Core
 /// @{
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		class PaneBase
-			: public IPane
-            , public PositionableBase
-		{
-		  public:
-			PaneBase() {}
-			PaneBase(const Vec2f &position)
-				: PositionableBase(position) {}
-			PaneBase(const Vec2f &position, const Vec2f &size)
-				: PositionableBase(position, size) {}
-			PaneBase(const Vec2f &position, const Vec2f &size, bool visible)
-				: PositionableBase(position, size, visible) {}
+    class PaneBase
+        : public IPane
+        , public PositionableBase
+    {
+      public:
+        PaneBase() {}
+        PaneBase(const Vec2f &position)
+            : PositionableBase(position) {}
+        PaneBase(const Vec2f &position, const Vec2f &size)
+            : PositionableBase(position, size) {}
+        PaneBase(const Vec2f &position, const Vec2f &size, bool visible)
+            : PositionableBase(position, size, visible) {}
 
-			virtual ~PaneBase() {}
-		};
+        virtual ~PaneBase() {}
+    };
 
-	}
+  }
 }
 
 /// @}

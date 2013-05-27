@@ -6,15 +6,15 @@
 /// @{
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		struct IKeyListener
-		{
-			virtual bool onKeyDown( cinder::app::KeyEvent event ) { return false; }
-			virtual bool onKeyUp( cinder::app::KeyEvent event ) { return false; }
-		};
-		typedef shared_ptr<IKeyListener> KeyListenerRef;
-	}
+    struct IKeyListener
+    {
+        virtual bool onKeyDown( cinder::app::KeyEvent event ) { return false; }
+        virtual bool onKeyUp( cinder::app::KeyEvent event ) { return false; }
+    };
+    typedef shared_ptr<IKeyListener> KeyListenerRef;
+  }
 }
 
 /// @}

@@ -5,16 +5,16 @@
 /// @{
 
 namespace cinderpane {
-	namespace core {
+  namespace core {
 
-		struct ITouchListener
-		{
-			virtual bool onTouchesBegan( cinder::app::TouchEvent event ) { return false; }
-			virtual bool onTouchesMoved( cinder::app::TouchEvent event ) { return false; }
-			virtual bool onTouchesEnded( cinder::app::TouchEvent event ) { return false; }
-		};
-		typedef shared_ptr<ITouchListener> TouchListenerRef;
-	}
+    struct ITouchListener
+    {
+        virtual bool onTouchesBegan( cinder::app::TouchEvent event ) { return false; }
+        virtual bool onTouchesMoved( cinder::app::TouchEvent event ) { return false; }
+        virtual bool onTouchesEnded( cinder::app::TouchEvent event ) { return false; }
+    };
+    typedef shared_ptr<ITouchListener> TouchListenerRef;
+  }
 }
 
 /// @}
