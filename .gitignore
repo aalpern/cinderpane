@@ -4,3 +4,4 @@ samples/*/xcode/build
 *xcuserdata*
 *.DS_Store
 *.pch
+docs/html
