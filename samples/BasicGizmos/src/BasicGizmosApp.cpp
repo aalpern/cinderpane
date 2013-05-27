@@ -422,8 +422,8 @@ GizmoRef make_framistat(float scale = 2.5)
 
     g->push_back(saveCommand);
     g->push_back(make_shared<SetLinewidth>(1.5));
-    // g->push_back(make_shared<SetLinecolor>(ColorA(0.4, 0.4, 0.4, 0.2)));
-    // g->push_back(make_shared<SetFillcolor>(ColorA(0.2, 0.2, 0.2, 0.2)));
+    g->push_back(make_shared<SetLinecolor>(ColorA(0.4, 0.4, 0.4, 0.2)));
+    g->push_back(make_shared<SetFillcolor>(ColorA(0.2, 0.2, 0.2, 0.2)));
     g->push_back(make_shared<SegmentedFilledArcPart>(22 * scale, 8 * scale, 6, 15));
     g->back()->setDisplayState(IPart::DisplaySecondary);
     g->back()->setFilled(false);
@@ -462,7 +462,7 @@ void BasicGizmosApp::setup()
     setFrameRate(30.0f);
     getWindow()->setTitle("Gizmo Catalog");
 
-    m_interface.setup(this);
+    m_interface.setup(this)->setUseGlow(true);
     m_gizmos = make_shared<Gizmo>();
 
     m_gizmos->push_back(make_grids_column());
@@ -471,7 +471,7 @@ void BasicGizmosApp::setup()
     m_gizmos->push_back(make_lines_column());
     m_gizmos->push_back(make_miscellany_column());
     m_gizmos->push_back(make_radial_progress_indicator());
-    // m_gizmos->push_back(make_fancy_compass(96));
+    m_gizmos->push_back(make_fancy_compass(96));
     m_gizmos->push_back(make_framistat());
     m_gizmos->push_back(make_custom_1());
 
