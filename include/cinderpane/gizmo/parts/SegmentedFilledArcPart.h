@@ -62,15 +62,15 @@ namespace cinderpane {
         {
             if ( m_segments.size() > 0 )
             {
-//					double begin = m_rotation;
-//					double end = m_rotation;
+/*
+                double begin = m_rotation;
+				double end = m_rotation;
                 bool isGap = false;
-                /*
-                  for ( double value : m_segments ) {
+                for ( double value : m_segments ) {
                   // TODO
                   isGap = !isGap;
-                  }
-                */
+                }
+               */
             }
             else
             {
