@@ -12,8 +12,8 @@
 		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
 		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
-		234F1FDE1753CE8F00CCC1BB /* passThru_vert.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 234F1FDD1753CE8F00CCC1BB /* passThru_vert.glsl */; };
-		234F1FE01753CEB400CCC1BB /* gaussianBlur_frag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 234F1FDF1753CEB400CCC1BB /* gaussianBlur_frag.glsl */; };
+		234F1FE31753CF1200CCC1BB /* gaussianBlur_frag.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 234F1FE11753CF1200CCC1BB /* gaussianBlur_frag.glsl */; };
+		234F1FE41753CF1200CCC1BB /* passThru_vert.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 234F1FE21753CF1200CCC1BB /* passThru_vert.glsl */; };
 		34F25185D05B40AC8F8E4834 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C2E13A2918645ADADDF152B /* CinderApp.icns */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
@@ -31,8 +31,8 @@
 		0598E068030B4C4ABFDA37E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		19F836B64ECA4B18998ED244 /* Cairo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = Cairo.cpp; path = ../../../../cinder/blocks/Cairo/src/Cairo.cpp; sourceTree = "<group>"; };
-		234F1FDD1753CE8F00CCC1BB /* passThru_vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = passThru_vert.glsl; path = ../resources/passThru_vert.glsl; sourceTree = "<group>"; };
-		234F1FDF1753CEB400CCC1BB /* gaussianBlur_frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gaussianBlur_frag.glsl; path = ../resources/gaussianBlur_frag.glsl; sourceTree = "<group>"; };
+		234F1FE11753CF1200CCC1BB /* gaussianBlur_frag.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gaussianBlur_frag.glsl; path = ../../resources/gaussianBlur_frag.glsl; sourceTree = "<group>"; };
+		234F1FE21753CF1200CCC1BB /* passThru_vert.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = passThru_vert.glsl; path = ../../resources/passThru_vert.glsl; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		358DC0719C0A477DA06230B1 /* BasicGizmos_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = BasicGizmos_Prefix.pch; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				234F1FDF1753CEB400CCC1BB /* gaussianBlur_frag.glsl */,
-				234F1FDD1753CE8F00CCC1BB /* passThru_vert.glsl */,
+				234F1FE11753CF1200CCC1BB /* gaussianBlur_frag.glsl */,
+				234F1FE21753CF1200CCC1BB /* passThru_vert.glsl */,
 				3C2E13A2918645ADADDF152B /* CinderApp.icns */,
 				0598E068030B4C4ABFDA37E8 /* Info.plist */,
 			);
@@ -246,8 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				34F25185D05B40AC8F8E4834 /* CinderApp.icns in Resources */,
-				234F1FDE1753CE8F00CCC1BB /* passThru_vert.glsl in Resources */,
-				234F1FE01753CEB400CCC1BB /* gaussianBlur_frag.glsl in Resources */,
+				234F1FE31753CF1200CCC1BB /* gaussianBlur_frag.glsl in Resources */,
+				234F1FE41753CF1200CCC1BB /* passThru_vert.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
