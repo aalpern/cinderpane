@@ -194,21 +194,21 @@ namespace cinderpane {
             m_format.setSamples(4);
             this->resize(app->getWindowWidth(), app->getWindowHeight());
 
-            /*
-              TODO: events have change in cinder 0.8.5
-              app->registerKeyDown(      this,          &Interface::onKeyDown);
-              app->registerResize(       this,          &Interface::onResize);
-              app->registerMouseDown(    &m_dispatcher, &EventDispatcher::onMouseDown);
-              app->registerMouseUp(      &m_dispatcher, &EventDispatcher::onMouseUp);
-              app->registerMouseWheel(   &m_dispatcher, &EventDispatcher::onMouseWheel);
-              app->registerMouseMove(    &m_dispatcher, &EventDispatcher::onMouseMove);
-              app->registerMouseDrag(    &m_dispatcher, &EventDispatcher::onMouseDown);
-              app->registerKeyDown(      &m_dispatcher, &EventDispatcher::onKeyDown);
-              app->registerKeyUp(        &m_dispatcher, &EventDispatcher::onKeyUp);
-              app->registerTouchesBegan( &m_dispatcher, &EventDispatcher::onTouchesBegan);
-              app->registerTouchesMoved( &m_dispatcher, &EventDispatcher::onTouchesMoved);
-              app->registerTouchesEnded( &m_dispatcher, &EventDispatcher::onTouchesEnded);
-            */
+            cinder::app::WindowRef window = app->getWindow();
+            if (window) {
+                window->connectKeyDown(     &Interface::onKeyDown, this);
+                window->connectResize(      &Interface::onResize,  this);
+                window->connectMouseUp(     &EventDispatcher::onMouseUp,      &m_dispatcher);
+                window->connectMouseDown(   &EventDispatcher::onMouseDown,    &m_dispatcher);
+                window->connectMouseWheel(  &EventDispatcher::onMouseWheel,   &m_dispatcher);
+                window->connectMouseMove(   &EventDispatcher::onMouseMove,    &m_dispatcher);
+                window->connectMouseDrag(   &EventDispatcher::onMouseDrag,    &m_dispatcher);
+                window->connectKeyDown(     &EventDispatcher::onKeyDown,      &m_dispatcher);
+                window->connectKeyUp(       &EventDispatcher::onKeyUp,        &m_dispatcher);
+                window->connectTouchesBegan(&EventDispatcher::onTouchesBegan, &m_dispatcher);
+                window->connectTouchesMoved(&EventDispatcher::onTouchesMoved, &m_dispatcher);
+                window->connectTouchesEnded(&EventDispatcher::onTouchesEnded, &m_dispatcher);
+            }
 
             try {
 #ifdef _WIN32
@@ -222,6 +222,11 @@ namespace cinderpane {
                 std::cout << ex.what() << std::endl;
             }
             return this;
+        }
+
+        void onResize()
+        {
+            // TODO
         }
 
         Interface* resize(int width, int height)
