@@ -1,4 +1,5 @@
-# Overview
+Overview
+########
 
 cinderpane is a UI library for libcinder, a cross-platform "creative
 coding" library in C++. The name comes from the idea of a window pane;
@@ -7,11 +8,13 @@ through it. An interface is composed of multiple panes, each of which
 is a positionable element on the 2D layer of a Cinder
 application. Each pane is generally rendered by a GL Texture.
 
-## Status
+Status
+------
 
 This is very much the preliminary stages of a work in progress.
 
-## Installation
+Installation
+------------
 
 cinderpane is currently organized as a header-only library. The
 primary reason for that is for simplicity's sake. While developing the
