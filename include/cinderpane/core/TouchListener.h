@@ -13,7 +13,7 @@ namespace cinderpane {
 			virtual bool onTouchesMoved( cinder::app::TouchEvent event ) { return false; }
 			virtual bool onTouchesEnded( cinder::app::TouchEvent event ) { return false; }
 		};
-		typedef boost::shared_ptr<ITouchListener> TouchListenerRef;
+		typedef shared_ptr<ITouchListener> TouchListenerRef;
 	}
 }
 

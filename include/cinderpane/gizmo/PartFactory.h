@@ -15,7 +15,7 @@ namespace cinderpane {
 
 			virtual PartRef makePart(const std::string &type = "") const = 0;
 		};
-		typedef boost::shared_ptr<IPartFactory> PartFactoryRef;
+      typedef std::shared_ptr<IPartFactory> PartFactoryRef;
 
 		template<typename PartType>
 		class BasicPartFactory

@@ -107,7 +107,7 @@ namespace cinderpane {
 			Vec2f m_position;
 			Vec2f m_size;
 		};
-		typedef boost::shared_ptr<IPositionable> PositionableRef;
+		typedef shared_ptr<IPositionable> PositionableRef;
 	}
 }
 

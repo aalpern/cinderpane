@@ -1,5 +1,4 @@
 #pragma once
-#include <boost/shared_ptr.hpp>
 #include "cinderpane/gizmo/CompositePart.h"
 
 /// @addtogroup Gizmo
@@ -42,7 +41,7 @@ namespace cinderpane {
 				xmlEndTag(os, "Gizmo");
 			}
 		};
-		typedef boost::shared_ptr<Gizmo> GizmoRef;
+		typedef shared_ptr<Gizmo> GizmoRef;
 
 	}
 } // end namespace cinderpane::gizmo

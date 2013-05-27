@@ -1,6 +1,5 @@
 #pragma once
 #include <list>
-#include <boost/shared_ptr.hpp>
 #include "cinder/app/App.h"
 #include "cinderpane/cinder/Utils.h"
 #include "cinderpane/cinderpane/Positionable.h"

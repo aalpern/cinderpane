@@ -1,6 +1,5 @@
 #pragma once
 #include <stack>
-#include <boost/shared_ptr.hpp>
 #include "cinder/Cinder.h"
 #include "cinderpane/cinder/Solarized.h"
 #include "cinderpane/gizmo/fwd.h"

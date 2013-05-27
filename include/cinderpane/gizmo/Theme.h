@@ -16,7 +16,7 @@ namespace cinderpane {
 			virtual ColorA getFillColor(IPart::DisplayState state, bool selected) const = 0;
 			virtual ColorA getTextColor(IPart::DisplayState state, bool selected) const = 0;
 		};
-		typedef boost::shared_ptr<ITheme> ThemeRef;
+		typedef std::shared_ptr<ITheme> ThemeRef;
 
 	}
 }

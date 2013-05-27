@@ -7,26 +7,26 @@
 /// @{
 
 namespace cinderpane {
-	namespace gizmo {
+  namespace gizmo {
 
-		using cinder::Vec2f;
-		using cinder::Rectf;
-		using cinder::ColorAf;
-		using cinder::ColorA;
+    using cinder::Vec2f;
+    using cinder::Rectf;
+    using cinder::ColorAf;
+    using cinder::ColorA;
 
-		using boost::make_shared;
+    using std::make_shared;
 
-		struct IRenderable;
-		typedef boost::shared_ptr<IRenderable> RenderableRef;
+    struct IRenderable;
+    typedef shared_ptr<IRenderable> RenderableRef;
 
-		struct IPart;
-		typedef boost::shared_ptr<IPart> PartRef;
-		typedef std::vector<PartRef>     PartVector;
+    struct IPart;
+    typedef std::shared_ptr<IPart> PartRef;
+    typedef std::vector<PartRef>     PartVector;
 
-		class GizmoContext;
+    class GizmoContext;
 
-		static const double DEFAULT_RADIUS = 48.0;
-	}
+    static const double DEFAULT_RADIUS = 48.0;
+  }
 }
 
 /// @}

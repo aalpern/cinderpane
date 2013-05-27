@@ -1,5 +1,6 @@
 #pragma once
 #include "cinder/app/App.h"
+#include "cinderpane/shared_ptr.h"
 
 /// @addtogroup Core
 /// @{
@@ -19,7 +20,7 @@ namespace cinderpane {
 			virtual bool onMouseEnter( cinder::app::MouseEvent event ) { return false; }
 			virtual bool onMouseExit( cinder::app::MouseEvent event ) { return false; }
 		};
-		typedef boost::shared_ptr<IMouseListener> MouseListenerRef;
+		typedef shared_ptr<IMouseListener> MouseListenerRef;
 	}
 }
 

@@ -1,10 +1,10 @@
 #pragma once
 #include <stack>
-#include <boost/shared_ptr.hpp>
 // #include "cairo.h"
 #include "cinder/Cinder.h"
 #include "cinder/gl/gl.h"
 #include "cinder/cairo/Cairo.h"
+#include "cinderpane/shared_ptr.h"
 #include "cinderpane/gizmo/Part.h"
 #include "cinderpane/Gizmo/SolarizedTheme.h"
 #include "cinderpane/Gizmo/MonochromeTheme.h"

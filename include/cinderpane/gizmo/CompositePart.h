@@ -97,7 +97,7 @@ namespace cinderpane {
 		  protected:
 			container_type m_parts;
 		};
-		typedef boost::shared_ptr<CompositePart> CompositePartRef;
+		typedef shared_ptr<CompositePart> CompositePartRef;
 	}
 }
 

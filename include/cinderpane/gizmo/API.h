@@ -12,7 +12,7 @@ namespace cinderpane {
 
 		PartFactoryRef make_part_factory()
 		{
-            boost::shared_ptr<PartFactory> factory( new PartFactory() );
+            shared_ptr<PartFactory> factory( new PartFactory() );
 
 			// Basic parts
 			factory->add_factory<ArcPart>("Arc");

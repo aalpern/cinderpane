@@ -52,7 +52,7 @@ namespace cinderpane {
 			virtual void  setVisible(bool visible) = 0;
 			/// @}
 		};
-		typedef boost::shared_ptr<IPositionable> PositionableRef;
+		typedef shared_ptr<IPositionable> PositionableRef;
 	}
 }
 

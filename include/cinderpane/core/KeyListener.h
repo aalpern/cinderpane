@@ -1,5 +1,6 @@
 #pragma once
 #include "cinder/app/App.h"
+#include "cinderpane/shared_ptr.h"
 
 /// @addtogroup Core
 /// @{
@@ -12,7 +13,7 @@ namespace cinderpane {
 			virtual bool onKeyDown( cinder::app::KeyEvent event ) { return false; }
 			virtual bool onKeyUp( cinder::app::KeyEvent event ) { return false; }
 		};
-		typedef boost::shared_ptr<IKeyListener> KeyListenerRef;
+		typedef shared_ptr<IKeyListener> KeyListenerRef;
 	}
 }
 

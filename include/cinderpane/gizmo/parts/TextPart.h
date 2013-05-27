@@ -87,7 +87,7 @@ namespace cinderpane {
 			std::string m_fontName;
 			double m_fontSize;
 		};
-		typedef boost::shared_ptr<TextPart> TextPartRef;
+      typedef std::shared_ptr<TextPart> TextPartRef;
 
 	}
 } // end namespace cinderpane::gizmo
