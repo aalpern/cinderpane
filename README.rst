@@ -9,7 +9,7 @@ application. Each pane is generally rendered by a GL Texture.
 
 ## Status
 
-This is very much the preliminary stages of a work in progress. 
+This is very much the preliminary stages of a work in progress.
 
 ## Installation
 
@@ -17,12 +17,3 @@ cinderpane is currently organized as a header-only library. The
 primary reason for that is for simplicity's sake. While developing the
 core library, learning GL, and learning XCode, I didn't want to also
 need to learn the ins and outs of building libraries on OS X as well.
-
-## Getting Started
-
-> zugster/gizmo/Gizmo.h
-> zugster/gizmo/Part.h
-> zugster/gizmo/parts/*.h
-> zugster/cinderpane/Interface.h
-> zugster/cinderpane/TexturePane.h
-
