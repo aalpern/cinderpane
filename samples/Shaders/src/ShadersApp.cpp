@@ -116,7 +116,7 @@ class ShadersApp : public AppNative {
   public:
     void setup();
     void mouseDown( MouseEvent event );
-	void keyDown(KeyEvent event);
+    void keyDown(KeyEvent event);
     void update();
     void draw();
 
@@ -140,8 +140,8 @@ class ShadersApp : public AppNative {
 void ShadersApp::setup()
 {
 #if MOVIE
-	setupMovie(600);
-	startMovie();
+    setupMovie(600);
+    startMovie();
 #endif
 
     m_format.enableMipmapping(false);
@@ -149,17 +149,17 @@ void ShadersApp::setup()
     m_format.setSamples(4);
 
     m_bDrawShaded        = true;
-	m_gizmo              = make_gizmo( WIDTH / 2, HEIGHT / 2, 4.0 );
+    m_gizmo              = make_gizmo( WIDTH / 2, HEIGHT / 2, 4.0 );
     m_framebuffer        = gl::Fbo(WIDTH, HEIGHT, m_format);
     m_framebuffer_shaded = gl::Fbo(WIDTH, HEIGHT, m_format);
 
 #if 0
-    //	write_xml(cinder::getDocumentsDirectory() + "/gizmo.xml", m_gizmo);
-	try {
-		m_gizmo = read_xml(cinder::getDocumentsDirectory() + "/gizmo.xml");
-	} catch ( const std::exception &ex ) {
-		std::cerr << "Failed to load gizmo: " << ex.what() << std::endl;
-	}
+    // write_xml(cinder::getDocumentsDirectory() + "/gizmo.xml", m_gizmo);
+    try {
+        m_gizmo = read_xml(cinder::getDocumentsDirectory() + "/gizmo.xml");
+    } catch ( const std::exception &ex ) {
+        std::cerr << "Failed to load gizmo: " << ex.what() << std::endl;
+    }
 #endif
 
     try {
@@ -168,8 +168,8 @@ void ShadersApp::setup()
 //                m_shader = gl::GlslProg(loadResource("v002.blur.vert"),
 //                                        loadResource("v002.blur.frag"));
 #ifdef _WIN32
-                m_shader = gl::GlslProg(loadFile("passThru_vert.glsl"),
-                                        loadFile("gaussianBlur_frag.glsl"));
+        m_shader = gl::GlslProg(loadFile("passThru_vert.glsl"),
+                                loadFile("gaussianBlur_frag.glsl"));
 #else
         m_shader = gl::GlslProg(loadResource("passThru_vert.glsl"),
                                 loadResource("gaussianBlur_frag.glsl"));
@@ -180,12 +180,12 @@ void ShadersApp::setup()
 }
 
 /*
-void ShadersApp::prepareSettings(Settings *settings)
-{
-	settings->setWindowSize( WIDTH, HEIGHT );
-	settings->setFrameRate(  30.0f );
-	settings->setTitle("Shader Test");
-}
+  void ShadersApp::prepareSettings(Settings *settings)
+  {
+  settings->setWindowSize( WIDTH, HEIGHT );
+  settings->setFrameRate(  30.0f );
+  settings->setTitle("Shader Test");
+  }
 */
 
 void ShadersApp::mouseDown( MouseEvent event )
@@ -200,11 +200,11 @@ void ShadersApp::keyDown( KeyEvent event )
 
 void ShadersApp::update()
 {
-	if ( m_gizmo )
-	{
-		m_gizmo->updateGizmo();
-		cinderpane::gizmo::render_to_framebuffer(m_framebuffer, m_gizmo);
-	}
+    if ( m_gizmo )
+    {
+        m_gizmo->updateGizmo();
+        cinderpane::gizmo::render_to_framebuffer(m_framebuffer, m_gizmo);
+    }
 
 }
 
@@ -213,7 +213,7 @@ void ShadersApp::draw()
     if ( !m_gizmo || !m_framebuffer )
         return;
 
-	gl::setViewport( getWindowBounds() );
+    gl::setViewport( getWindowBounds() );
 
     draw_plain();
 
@@ -227,21 +227,21 @@ void ShadersApp::draw()
 
 void ShadersApp::render_framebuffer_shaded()
 {
-	m_shader.bind();
-	m_shader.uniform( "tex0", 0 );
-	m_shader.uniform( "sampleOffset", Vec2f( cos( .0 ),
-                                            sin( .0 ) ) * ( 1.0f / getWindowWidth() ) );
+    m_shader.bind();
+    m_shader.uniform( "tex0", 0 );
+    m_shader.uniform( "sampleOffset", Vec2f( cos( .0 ),
+                                             sin( .0 ) ) * ( 1.0f / getWindowWidth() ) );
 
-	cinderpane::core::render_shader(m_shader, m_framebuffer, m_framebuffer_shaded);
+    cinderpane::core::render_shader(m_shader, m_framebuffer, m_framebuffer_shaded);
 }
 
 void ShadersApp::draw_plain()
 {
-	gl::clear( ColorA( 1.0, 0.0, 0.0, 1.0 ) );
-	gl::pushMatrices();
-	gl::setMatricesWindow(WIDTH, HEIGHT, false );
+    gl::clear( ColorA( 1.0, 0.0, 0.0, 1.0 ) );
+    gl::pushMatrices();
+    gl::setMatricesWindow(WIDTH, HEIGHT, false );
     gl::draw( m_framebuffer.getTexture() );
-	gl::popMatrices();
+    gl::popMatrices();
 }
 
 void ShadersApp::draw_shaded()
