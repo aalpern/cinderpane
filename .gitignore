@@ -1,5 +1,4 @@
 *~
-samples/Shaders/xcode/build
 samples/*/xcode/build
 *.old
 *xcuserdata*

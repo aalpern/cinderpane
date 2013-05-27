@@ -1,25 +1,22 @@
-#include "cinder/app/App.h"
+#include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
 #include "cinder/gl/Fbo.h"
 #include "cinder/gl/GlslProg.h"
 #include "cinder/Camera.h"
-#include "zugster/gizmo/API.h"
-#include "zugster/gizmo/Util.h"
-#include "zugster/cinderpane/Interface.h"
-#include "zugster/cinderpane/TextPane.h"
-#include "zugster/gizmo/GizmoPane.h"
+#include "cinderpane/gizmo/API.h"
+#include "cinderpane/gizmo/Util.h"
+#include "cinderpane/core/Interface.h"
+#include "cinderpane/core/TextPane.h"
+#include "cinderpane/gizmo/GizmoPane.h"
 
-#pragma comment(lib, "cairo-static.lib")
-
-using namespace cinder;
-using namespace cinder::app;
-using namespace zugster::gizmo;
-using namespace zugster::cinderext;
-using namespace zugster;
-using namespace zugster::cinderpane;
-using boost::shared_ptr;
-using boost::make_shared;
+using namespace ci;
+using namespace ci::app;
+using namespace std;
+using namespace cinderpane;
+using namespace cinderpane::gizmo;
+using namespace cinderpane::ext;
+using namespace cinderpane::core;
 
 #define MOVIE 0
 static const int WIDTH   = 1280;
@@ -82,7 +79,7 @@ float padding = 12;
 void custom(GizmoContext &ctx)
 {
 	float x_center = WIDTH / 2;
-	
+
 	ctx.save();
 	ctx.Cairo.setLineWidth(2.0);
 
@@ -93,7 +90,7 @@ void custom(GizmoContext &ctx)
 	// Draw most of a circle
 	Vec2f center(padding + GIZMO_WIDTH / 2, HEIGHT - padding - (GIZMO_HEIGHT / 2));
 	ctx.Cairo.arc(center, GIZMO_HEIGHT / 2, cinder::toRadians(90.0f), cinder::toRadians(45.0f));
-	Vec2f point = zugster::cinderext::perimeter(center, GIZMO_HEIGHT / 2, cinder::toRadians(45.0f));
+	Vec2f point = cinderpane::ext::perimeter(center, GIZMO_HEIGHT / 2, cinder::toRadians(45.0f));
 		// Vec2f nextPoint = point + Vec2f(16, 16);
 
 	ctx.Cairo.lineTo(WIDTH - point.x, point.y);
@@ -101,7 +98,7 @@ void custom(GizmoContext &ctx)
 	ctx.Cairo.arc(center, GIZMO_HEIGHT / 2, cinder::toRadians(135.0), cinder::toRadians(90.0f));
 
 	ctx.Cairo.closePath();
-	
+
 	ctx.draw(true, true, ::state);
 	ctx.restore();
 }
@@ -116,11 +113,11 @@ GizmoRef make_custom()
 GizmoRef make_reticle()
 {
     GizmoRef g = make_shared<Gizmo>(WIDTH / 2, HEIGHT / 2);
-    
+
     g->push_back(make_shared<RectanglePart>(WIDTH / 10, HEIGHT / 10, true, true));
     g->push_back(make_shared<GridPart>(Vec2f(WIDTH / 10, HEIGHT / 10), 2, 2, false, false));
-    
-    
+
+
     return g;
 }
 
@@ -133,7 +130,7 @@ GizmoRef make_fancy_compass(double radius)
 	radius -= 12;
 	GizmoRef g = make_shared<Gizmo>();
 	g->push_back(saveCommand);
-	
+
 	// A subtle gradient around the edge
 	g->push_back(make_shared<GradientCirclePart>(radius, radius / 2, cyan_dark, ColorA(0, 0, 0, 0)));
 	g->push_back(make_shared<SetLinewidth>(2.0));
@@ -145,7 +142,7 @@ GizmoRef make_fancy_compass(double radius)
 	g->push_back(make_shared<RadialLinesPart>(radius, radius / 16,  48));
 
 	// Add some dark circles in the center
-	
+
 	g->push_back(make_shared<CirclePart>(radius / 3));
 	g->back()->setDisplayState(IPart::DisplayDisabled);
 	g->push_back(make_shared<CirclePart>(radius / 2));
@@ -159,7 +156,7 @@ GizmoRef make_fancy_compass(double radius)
 	// the perimeter via PerimeterPart
 	PartRef indicator = make_shared<RegularPolygonPart>(9, 3, true, true);
 	indicator->setDisplayState(IPart::DisplaySubCritical);
-	g->push_back(make_shared<PerimeterPart>(radius - 20, 
+	g->push_back(make_shared<PerimeterPart>(radius - 20,
 											indicator,
 											true));
 	g->back()->setRotation(220);
@@ -181,7 +178,7 @@ GizmoRef make_fancy_compass(double radius)
 	g->push_back(restoreCommand);
 //	g->storeXML(App::get()->console());
 
-	
+
 	return g;
 }
 
@@ -189,11 +186,12 @@ GizmoRef make_fancy_compass(double radius)
 // App
 //=============================================================================
 
-class ThreeDeeApp : public AppBasic {
+class ThreeDeeApp : public AppNative {
   public:
 	void setup();
-	void prepareSettings(Settings *settings);
-	void resize( ResizeEvent event );
+	// void prepareSettings(Settings *settings);
+	// void resize( ResizeEvent event );
+	void mouseDown( MouseEvent event );
 	void update();
 	void draw();
 
@@ -208,8 +206,9 @@ class ThreeDeeApp : public AppBasic {
 	CameraPersp  m_camera;
 
 	Interface m_interface;
-	
+
 	Matrix44f m_cube_rotation;
+
 };
 
 void ThreeDeeApp::setup()
@@ -222,23 +221,24 @@ void ThreeDeeApp::setup()
 	m_cube_rotation.setToIdentity();
 
 	m_interface.add(make_shared<GizmoPane>(Vec2f(0, 0), Vec2f(WIDTH, HEIGHT), make_custom()));
-    m_interface.add(make_shared<GizmoPane>(Vec2f(padding, HEIGHT - GIZMO_HEIGHT - padding ), 
-										   Vec2f(GIZMO_WIDTH, GIZMO_HEIGHT), 
+    m_interface.add(make_shared<GizmoPane>(Vec2f(padding, HEIGHT - GIZMO_HEIGHT - padding ),
+										   Vec2f(GIZMO_WIDTH, GIZMO_HEIGHT),
 										   make_fancy_compass((GIZMO_HEIGHT / 2) * .75)));
 	m_interface.add(make_shared<GizmoPane>(Vec2f(WIDTH - padding - GIZMO_WIDTH, HEIGHT - GIZMO_HEIGHT - padding),
 										   Vec2f(GIZMO_WIDTH, GIZMO_HEIGHT),
 										   m_gizmo));
     m_interface.add(make_shared<GizmoPane>(Vec2f(500, 300), Vec2f(WIDTH / 10.0f, HEIGHT / 10.0f), make_reticle()));
-    
+
 	glEnable( GL_TEXTURE_2D );
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 }
 
+/*
 void ThreeDeeApp::prepareSettings(Settings *settings)
 {
 	settings->setWindowSize( WIDTH, HEIGHT );
-	settings->setFrameRate(  30.0f );   
+	settings->setFrameRate(  30.0f );
 	settings->setTitle("ThreeDee Test");
 }
 
@@ -246,9 +246,14 @@ void ThreeDeeApp::resize( ResizeEvent event )
 {
 	// now tell our Camera that the window aspect ratio has changed
 	m_camera.setPerspective( 60, getWindowAspectRatio(), 1, 1000 );
-	
+
 	// and in turn, let OpenGL know we have a new camera
 	gl::setMatrices( m_camera );
+}
+*/
+
+void ThreeDeeApp::mouseDown( MouseEvent event )
+{
 }
 
 void ThreeDeeApp::update()
@@ -269,7 +274,7 @@ void ThreeDeeApp::draw()
 		return;
 
 	gl::enableAlphaBlending();
-    // gl::clear( ColorAf( 0.2, 0.2, 0.2, 0.0 ) );   
+    // gl::clear( ColorAf( 0.2, 0.2, 0.2, 0.0 ) );
     gl::clear();
 
 	// Draw the cube
@@ -281,9 +286,9 @@ void ThreeDeeApp::draw()
 	gl::drawCube( Vec3f::zero(), Vec3f(2.0f, 2.0f, 2.0f ));
 	gl::popMatrices();
 	m_texture.unbind();
-	
+
 	// Draw the interface
 	m_interface.render();
 }
 
-CINDER_APP_BASIC( ThreeDeeApp, RendererGl )
+CINDER_APP_NATIVE( ThreeDeeApp, RendererGl )
