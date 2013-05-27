@@ -1,7 +1,7 @@
 #pragma once
 #include "cinderpane/gizmo/Gizmo.h"
 #include "cinderpane/gizmo/Util.h"
-#include "cinderpane/cinderpane/TexturePane.h"
+#include "cinderpane/core/TexturePane.h"
 
 /// @addtogroup Gizmo
 /// @{

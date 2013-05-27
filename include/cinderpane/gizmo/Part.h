@@ -1,8 +1,8 @@
 #pragma once
 #include <list>
 #include "cinder/app/App.h"
-#include "cinderpane/cinder/Utils.h"
-#include "cinderpane/cinderpane/Positionable.h"
+#include "cinderpane/ext/Utils.h"
+#include "cinderpane/core/Positionable.h"
 #include "cinderpane/gizmo/fwd.h"
 #include "cinderpane/gizmo/Renderable.h"
 #include "cinderpane/gizmo/Persistable.h"

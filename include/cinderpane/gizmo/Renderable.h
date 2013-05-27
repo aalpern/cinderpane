@@ -1,7 +1,7 @@
 #pragma once
 #include <stack>
 #include "cinder/Cinder.h"
-#include "cinderpane/cinder/Solarized.h"
+#include "cinderpane/ext/Solarized.h"
 #include "cinderpane/gizmo/fwd.h"
 
 /// @addtogroup Gizmo

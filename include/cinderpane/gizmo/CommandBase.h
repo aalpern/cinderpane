@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "cinderpane/cinderpane/PositionableBase.h"
+#include "cinderpane/core/PositionableBase.h"
 #include "cinderpane/gizmo/Part.h"
 
 // Disable 'inherits via dominance' warning, which we get thanks to
