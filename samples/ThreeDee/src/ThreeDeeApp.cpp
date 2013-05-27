@@ -189,8 +189,7 @@ GizmoRef make_fancy_compass(double radius)
 class ThreeDeeApp : public AppNative {
   public:
     void setup();
-    // void prepareSettings(Settings *settings);
-    // void resize( ResizeEvent event );
+    void resize();
     void mouseDown( MouseEvent event );
     void update();
     void draw();
@@ -238,16 +237,16 @@ void ThreeDeeApp::setup()
     gl::enableDepthWrite();
 }
 
-/*
-  void ThreeDeeApp::resize( ResizeEvent event )
-  {
-  // now tell our Camera that the window aspect ratio has changed
-  m_camera.setPerspective( 60, getWindowAspectRatio(), 1, 1000 );
+void ThreeDeeApp::resize()
+{
+    m_interface.resize(getWindowWidth(), getWindowHeight());
 
-  // and in turn, let OpenGL know we have a new camera
-  gl::setMatrices( m_camera );
-  }
-*/
+    // now tell our Camera that the window aspect ratio has changed
+    m_camera.setPerspective( 60, getWindowAspectRatio(), 1, 1000 );
+
+    // and in turn, let OpenGL know we have a new camera
+    gl::setMatrices( m_camera );
+}
 
 void ThreeDeeApp::mouseDown( MouseEvent event )
 {

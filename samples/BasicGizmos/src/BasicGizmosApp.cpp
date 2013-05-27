@@ -447,6 +447,7 @@ class BasicGizmosApp : public AppNative {
   public:
     void setup();
     void mouseDown( MouseEvent event );
+    void resize();
     void update();
     void draw();
 
@@ -482,6 +483,11 @@ void BasicGizmosApp::setup()
 
 void BasicGizmosApp::mouseDown( MouseEvent event )
 {
+}
+
+void BasicGizmosApp::resize()
+{
+    m_interface.resize(getWindowWidth(), getWindowHeight());
 }
 
 void BasicGizmosApp::update()

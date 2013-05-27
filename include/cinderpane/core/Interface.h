@@ -2,6 +2,7 @@
 #include <time.h>
 #include <sstream>
 #include "cinder/app/AppBasic.h"
+#include "cinder/app/Window.h"
 #include "cinder/Utilities.h"
 #include "cinder/DataSource.h"
 #include "cinder/gl/Fbo.h"
@@ -76,10 +77,7 @@ namespace cinderpane {
     {
       public:
         Interface()
-            : m_app(NULL)
-            , m_visible(true)
-            , m_useFrameBuffer(true)
-            , m_useGlow(false)
+            : Interface(NULL)
         {
         }
 
@@ -89,7 +87,8 @@ namespace cinderpane {
             , m_useFrameBuffer(true)
             , m_useGlow(false)
         {
-            setup(app);
+            if (app)
+                setup(app);
         }
 
         ~Interface() {}
@@ -167,8 +166,7 @@ namespace cinderpane {
             m_format.enableDepthBuffer(false);
             m_format.setCoverageSamples(16);
             m_format.setSamples(4);
-            m_framebuffer        = cinder::gl::Fbo(app->getWindowWidth(), app->getWindowHeight(), m_format);
-            m_framebuffer_shaded = cinder::gl::Fbo(app->getWindowWidth(), app->getWindowHeight(), m_format);
+            this->resize(app->getWindowWidth(), app->getWindowHeight());
 
             /*
               TODO: events have change in cinder 0.8.5
@@ -199,13 +197,11 @@ namespace cinderpane {
             }
         }
 
-        /*
-          TODO: Gone or moved in cinder 0.8.5?
-          bool onResize(cinder::app::ResizeEvent event)
-          {
-          return false;
-          }
-        */
+        void resize(int width, int height)
+        {
+            m_framebuffer        = cinder::gl::Fbo(width, height, m_format);
+            m_framebuffer_shaded = cinder::gl::Fbo(width, height, m_format);
+        }
 
         void update()
         {

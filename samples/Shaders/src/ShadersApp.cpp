@@ -117,6 +117,7 @@ class ShadersApp : public AppNative {
     void setup();
     void mouseDown( MouseEvent event );
     void keyDown(KeyEvent event);
+    void resize();
     void update();
     void draw();
 
@@ -194,6 +195,16 @@ void ShadersApp::keyDown( KeyEvent event )
         m_bDrawShaded = !m_bDrawShaded;
 }
 
+void ShadersApp::resize()
+{
+    int width = getWindowWidth();
+    int height = getWindowHeight();
+    m_gizmo              = make_gizmo( width / 2, height / 2, 4.0 );
+    m_framebuffer        = gl::Fbo(width, height, m_format);
+    m_framebuffer_shaded = gl::Fbo(width, height, m_format);
+    update();
+}
+
 void ShadersApp::update()
 {
     if ( m_gizmo )
@@ -235,7 +246,7 @@ void ShadersApp::draw_plain()
 {
     gl::clear( ColorA( 1.0, 0.0, 0.0, 1.0 ) );
     gl::pushMatrices();
-    gl::setMatricesWindow(WIDTH, HEIGHT, false );
+    gl::setMatricesWindow(getWindowWidth(), getWindowHeight(), false );
     gl::draw( m_framebuffer.getTexture() );
     gl::popMatrices();
 }
