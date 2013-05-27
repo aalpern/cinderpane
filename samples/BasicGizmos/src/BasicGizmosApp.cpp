@@ -457,6 +457,10 @@ class BasicGizmosApp : public AppNative {
 
 void BasicGizmosApp::setup()
 {
+    setWindowSize(WIDTH, HEIGHT);
+    setFrameRate(30.0f);
+    getWindow()->setTitle("Gizmo Catalog");
+
     m_interface.setup(this);
     m_gizmos = make_shared<Gizmo>();
 
@@ -469,10 +473,6 @@ void BasicGizmosApp::setup()
     // m_gizmos->push_back(make_fancy_compass(96));
     m_gizmos->push_back(make_framistat());
     m_gizmos->push_back(make_custom_1());
-
-    setWindowSize(WIDTH, HEIGHT);
-    setFrameRate(30.0f);
-    getWindow()->setTitle("Gizmo Catalog");
 
     m_interface.push_back(make_shared<GizmoPane>(0.0f, 0.0f, WIDTH, HEIGHT, m_gizmos));
     glEnable( GL_TEXTURE_2D );
