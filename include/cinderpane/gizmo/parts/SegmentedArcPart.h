@@ -1,5 +1,5 @@
 #pragma once
-#include "cinderpane/cinder/Shapes.h"
+#include "cinderpane/ext/Shapes.h"
 #include "cinderpane/gizmo/PartBase.h"
 
 namespace cinderpane {

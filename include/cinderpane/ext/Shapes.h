@@ -2,7 +2,7 @@
 #include "cinder/Cinder.h"
 #include "cinder/CinderMath.h"
 #include "cinder/cairo/Cairo.h"
-#include "cinderpane/cinder/Utils.h"
+#include "cinderpane/ext/Utils.h"
 
 namespace cinderpane {
 	namespace ext {

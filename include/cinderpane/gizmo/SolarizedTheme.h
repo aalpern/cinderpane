@@ -1,5 +1,5 @@
 #pragma once
-#include "cinderpane/cinder/Solarized.h"
+#include "cinderpane/ext/Solarized.h"
 #include "cinderpane/gizmo/Theme.h"
 
 /// @addtogroup Gizmo

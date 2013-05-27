@@ -1,8 +1,8 @@
 #pragma once
 #include <string.h>
 #include "cinder/cairo/Cairo.h"
-#include "cinderpane/cinder/Utils.h"
-#include "cinderpane/cinder/Shapes.h"
+#include "cinderpane/ext/Utils.h"
+#include "cinderpane/ext/Shapes.h"
 #include "cinderpane/gizmo/PartBase.h"
 #include "cinderpane/gizmo/parts/RectanglePart.h"
 
