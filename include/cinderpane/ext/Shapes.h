@@ -166,7 +166,7 @@ namespace cinderpane {
 		{
 			// Draw the border
 			Vec2f outerBegin = perimeter(position, outerRadius, begin);
-			Vec2f outerEnd   = perimeter(position, outerRadius, end);
+			// Vec2f outerEnd   = perimeter(position, outerRadius, end);
 			Vec2f innerBegin = perimeter(position, innerRadius, begin);
 			Vec2f innerEnd   = perimeter(position, innerRadius, end);
 

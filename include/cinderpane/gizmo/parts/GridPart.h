@@ -71,7 +71,7 @@ namespace cinderpane {
 
 				// upper left
 				cinder::Vec2f position = ( ctx.Position + m_position ) - ( m_size / 2 );
-				cinder::Vec2f center  = ctx.Position + m_position;
+				// cinder::Vec2f center  = ctx.Position + m_position;
 
 				// Outline & fill the grid
 				ctx.Cairo.newPath();

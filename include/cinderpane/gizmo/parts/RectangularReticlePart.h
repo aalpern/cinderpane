@@ -38,7 +38,7 @@ namespace cinderpane {
 
 			virtual void renderGizmo(GizmoContext &context)
 			{
-				Vec2f position = context.Position + m_position;
+				// Vec2f position = context.Position + m_position;
 #if 0
 				cinderpane::ext::square_reticle(context.Cairo,
 												   position.x - (m_size.x / 2),
