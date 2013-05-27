@@ -139,6 +139,11 @@ class ShadersApp : public AppNative {
 
 void ShadersApp::setup()
 {
+    setWindowSize( WIDTH, HEIGHT );
+    setFrameRate(  30.0f );
+    getWindow()->setTitle("Shader Test");
+
+
 #if MOVIE
     setupMovie(600);
     startMovie();
@@ -178,15 +183,6 @@ void ShadersApp::setup()
         std::cout << ex.what() << std::endl;
     }
 }
-
-/*
-  void ShadersApp::prepareSettings(Settings *settings)
-  {
-  settings->setWindowSize( WIDTH, HEIGHT );
-  settings->setFrameRate(  30.0f );
-  settings->setTitle("Shader Test");
-  }
-*/
 
 void ShadersApp::mouseDown( MouseEvent event )
 {

@@ -213,6 +213,10 @@ class ThreeDeeApp : public AppNative {
 
 void ThreeDeeApp::setup()
 {
+    setWindowSize( WIDTH, HEIGHT );
+    setFrameRate(  30.0f );
+    getWindow()->setTitle("ThreeDee Test");
+
     m_interface.setup(this);
 
     m_gizmo         = make_gizmo(2.5);
@@ -235,13 +239,6 @@ void ThreeDeeApp::setup()
 }
 
 /*
-  void ThreeDeeApp::prepareSettings(Settings *settings)
-  {
-  settings->setWindowSize( WIDTH, HEIGHT );
-  settings->setFrameRate(  30.0f );
-  settings->setTitle("ThreeDee Test");
-  }
-
   void ThreeDeeApp::resize( ResizeEvent event )
   {
   // now tell our Camera that the window aspect ratio has changed
