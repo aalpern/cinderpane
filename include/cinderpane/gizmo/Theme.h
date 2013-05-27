@@ -6,19 +6,19 @@
 /// @{
 
 namespace cinderpane {
-	namespace gizmo {
+  namespace gizmo {
 
-		struct ITheme
-		{
-			virtual ~ITheme() {}
+    struct ITheme
+    {
+        virtual ~ITheme() {}
 
-			virtual ColorA getLineColor(IPart::DisplayState state, bool selected) const = 0;
-			virtual ColorA getFillColor(IPart::DisplayState state, bool selected) const = 0;
-			virtual ColorA getTextColor(IPart::DisplayState state, bool selected) const = 0;
-		};
-		typedef std::shared_ptr<ITheme> ThemeRef;
+        virtual ColorA getLineColor(IPart::DisplayState state, bool selected) const = 0;
+        virtual ColorA getFillColor(IPart::DisplayState state, bool selected) const = 0;
+        virtual ColorA getTextColor(IPart::DisplayState state, bool selected) const = 0;
+    };
+    typedef std::shared_ptr<ITheme> ThemeRef;
 
-	}
+  }
 }
 
 /// @}

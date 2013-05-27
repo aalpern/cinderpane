@@ -9,19 +9,19 @@
 /// @{
 
 namespace cinderpane {
-	namespace gizmo {
+  namespace gizmo {
 
-		/// An interface for storing and retrieving configurations of
-		/// gizmos and parts from XML.
-		struct IPersistable
-		{
-			virtual ~IPersistable() {}
+    /// An interface for storing and retrieving configurations of
+    /// gizmos and parts from XML.
+    struct IPersistable
+    {
+        virtual ~IPersistable() {}
 
-			virtual void loadXML(const cinder::XmlTree &element,
-								 const PartFactoryRef &factory) = 0;
-			virtual void storeXML(std::ostream &os) const = 0;
-		};
-	}
+        virtual void loadXML(const cinder::XmlTree &element,
+                             const PartFactoryRef &factory) = 0;
+        virtual void storeXML(std::ostream &os) const = 0;
+    };
+  }
 }
 
 /// @}
