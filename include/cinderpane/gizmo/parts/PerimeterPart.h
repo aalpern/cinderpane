@@ -48,7 +48,7 @@ namespace cinderpane {
 								 const PartFactoryRef &factory)
 			{
 				PartBase::loadXML(element, factory);
-                const cinder::XmlTree &child = element.getChildren().front();
+                const cinder::XmlTree &child = *(element.getChildren().front()).get();
 				m_part = factory->makePart(child.getTag());
 				m_part->loadXML(child, factory);
 			}
