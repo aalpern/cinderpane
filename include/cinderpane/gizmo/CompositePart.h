@@ -31,10 +31,8 @@ namespace cinderpane {
         virtual void setDisplayState(DisplayState state)
         {
             PartBase::setDisplayState(state);
-            for ( iterator i = begin(); i != end(); i++ )
-            {
-                if ( *i )
-                    (*i)->setDisplayState(state);
+            for ( auto part : m_parts )  {
+                part->setDisplayState(state);
             }
         }
 
@@ -43,11 +41,8 @@ namespace cinderpane {
         virtual void updateGizmo()
         {
             base_type::updateGizmo();
-            for ( iterator i = begin(); i != end(); i++ ) {
-                if (*i)
-                {
-                    (*i)->updateGizmo();
-                }
+            for ( auto part : m_parts ) {
+                part->updateGizmo();
             }
         }
 
@@ -57,10 +52,9 @@ namespace cinderpane {
                 return;
 
             base_type::renderGizmo(context);
-            for ( iterator i = begin(); i != end(); i++ ) {
-                if (*i && (*i)->isVisible() )
-                {
-                    (*i)->renderGizmo(context);
+            for ( auto part : m_parts ) {
+                if (part->isVisible()) {
+                    part->renderGizmo(context);
                 }
             }
         }
@@ -71,23 +65,17 @@ namespace cinderpane {
         virtual void loadXML(const cinder::XmlTree &element,
                              const PartFactoryRef &factory)
         {
-            for ( cinder::XmlTree::ConstIter i = element.begin();
-                  i != element.end();
-                  i++ )
-            {
-                PartRef part = factory->makePart(i->getTag());
-                part->loadXML(*i, factory);
+            for ( auto child : element ) {
+                PartRef part = factory->makePart(child.getTag());
+                part->loadXML(child, factory);
                 push_back(part);
             }
         }
 
         virtual void storeXML(std::ostream &os) const
         {
-            for ( const_iterator i = begin();
-                  i!= end(); i++ )
-            {
-                if ( *i )
-                    (*i)->storeXML(os);
+            for ( auto part : m_parts ) {
+                part->storeXML(os);
             }
         }
         /// @}

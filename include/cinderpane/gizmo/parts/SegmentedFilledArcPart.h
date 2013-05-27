@@ -65,11 +65,12 @@ namespace cinderpane {
 //					double begin = m_rotation;
 //					double end = m_rotation;
 					bool isGap = false;
-					for ( std::vector<double>::iterator i = m_segments.begin(); i != m_segments.end(); i++ )
-					{
+                    /*
+                    for ( double value : m_segments ) {
 						// TODO
 						isGap = !isGap;
 					}
+                     */
 				}
 				else
 				{

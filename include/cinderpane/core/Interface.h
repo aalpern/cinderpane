@@ -211,12 +211,8 @@ namespace cinderpane {
         {
             if ( !m_visible )
                 return;
-
-            for ( iterator i = begin(); i != end(); i++ )
-            {
-                PaneRef pane = *i;
-                if ( pane )
-                    pane->updatePane();
+            for ( auto pane : m_panes ) {
+                pane->updatePane();
             }
         }
 
@@ -301,13 +297,8 @@ namespace cinderpane {
 
         void draw()
         {
-            for ( iterator i = begin(); i != end(); i++ )
-            {
-                PaneRef pane = *i;
-                if ( pane )
-                {
-                    pane->drawPane();
-                }
+            for ( auto pane : m_panes ) {
+                pane->drawPane();
             }
         }
 
