@@ -1,3 +1,6 @@
+#include "cinder/app/AppNative.h"
+#include "cinder/gl/gl.h"
+
 #include <boost/lexical_cast.hpp>
 #include "cinder/Cinder.h"
 #include "cinder/DataSource.h"
@@ -7,19 +10,17 @@
 #include "cinder/gl/Fbo.h"
 #include "cinder/gl/GlslProg.h"
 #include "cinder/Utilities.h"
-#include "zugster/cinder/App.h"
-#include "zugster/cinderpane/Interface.h"
-#include "zugster/gizmo/API.h"
-#include "zugster/gizmo/Util.h"
+#include "cinderpane/ext/MovieApp.h"
+#include "cinderpane/core/Interface.h"
+#include "cinderpane/gizmo/API.h"
+#include "cinderpane/gizmo/Util.h"
 
-#pragma comment(lib, "cairo-static.lib")
+using namespace ci;
+using namespace ci::app;
+using namespace std;
 
-using namespace cinder;
-using namespace cinder::app;
-using namespace zugster::gizmo;
-using namespace zugster::cinderext;
-using boost::shared_ptr;
-using boost::make_shared;
+using namespace cinderpane::gizmo;
+using namespace cinderpane::ext;
 
 static const int WIDTH  = 600;
 static const int HEIGHT = 600;
@@ -37,21 +38,19 @@ static PartRef saveCommand      = make_shared<ContextSave>();
 static PartRef restoreCommand   = make_shared<ContextRestore>();
 
 // Draw a sim-card shape (just a rectangle with one clipped corner)
-void draw_sim(cairo::Context &ctx, const Rectf &rect, int orientation = 0)
-{
+void draw_sim(cairo::Context &ctx, const Rectf &rect, int orientation = 0) {
     float cut_rate = 0.20;
     float cut = rect.getWidth() * cut_rate;
-    
+
     ctx.moveTo(rect.x1, rect.y1);
     ctx.lineTo(rect.x2 - cut, rect.y1);
     ctx.lineTo(rect.x2, rect.y1 + cut);
     ctx.lineTo(rect.x2, rect.y2);
     ctx.lineTo(rect.x1, rect.y2);
-    ctx.lineTo(rect.x1, rect.y1);    
+    ctx.lineTo(rect.x1, rect.y1);
 }
 
-void custom(GizmoContext &context)
-{
+void custom(GizmoContext &context) {
     context.save();
     cairo::Context &c = context.Cairo;
 
@@ -65,27 +64,26 @@ void custom(GizmoContext &context)
 
         context.LineColor -= 0.08;
         context.FillColor -= 0.08;
-        
+
         r += Vec2f(50,0);
-    }    
+    }
     context.restore();
 }
 
 
-GizmoRef make_gizmo(float x, float y, float scale = 1.0)
-{
-	GizmoRef g = make_shared<Gizmo>(x, y);
+GizmoRef make_gizmo(float x, float y, float scale = 1.0) {
+    GizmoRef g = make_shared<Gizmo>(x, y);
 
-	g->push_back(make_shared<SetLinecolor>(cyan));
-	g->push_back(make_shared<SetFillcolor>(cyan_fill));
+    g->push_back(make_shared<SetLinecolor>(cyan));
+    g->push_back(make_shared<SetFillcolor>(cyan_fill));
 
-	g->push_back(make_shared<CirclePart>(28 * scale, true /* outline */, true /* fill */));
-	g->push_back(make_shared<ArcPart>(30 * scale, 1 * scale, 225, 330));
-	g->push_back(make_shared<ArcPart>(30 * scale, 1 * scale, 0, 110));
-	g->push_back(make_shared<ArcPart>(32 * scale, 1 * scale, 90, 280));
-	g->push_back(make_shared<GradientCirclePart>( 12 * scale, 12 * scale, trans, ColorA(1.0, 1.0, 1.0, 1.0)));
-	g->push_back(make_shared<ArcPart>(36 * scale, 4 * scale, 45, 180));
-	g->push_back(make_shared<FilledArcPart>(44 * scale, 20 * scale, 330, 30));
+    g->push_back(make_shared<CirclePart>(28 * scale, true /* outline */, true /* fill */));
+    g->push_back(make_shared<ArcPart>(30 * scale, 1 * scale, 225, 330));
+    g->push_back(make_shared<ArcPart>(30 * scale, 1 * scale, 0, 110));
+    g->push_back(make_shared<ArcPart>(32 * scale, 1 * scale, 90, 280));
+    g->push_back(make_shared<GradientCirclePart>( 12 * scale, 12 * scale, trans, ColorA(1.0, 1.0, 1.0, 1.0)));
+    g->push_back(make_shared<ArcPart>(36 * scale, 4 * scale, 45, 180));
+    g->push_back(make_shared<FilledArcPart>(44 * scale, 20 * scale, 330, 30));
     g->back()->setDisplayState(IPart::DisplayWarning);
     g->back()->setRotationSpeed(5.0);
 
@@ -97,39 +95,37 @@ GizmoRef make_gizmo(float x, float y, float scale = 1.0)
     g->back()->setDisplayState(IPart::DisplaySecondary);
     g->back()->setFilled(false);
     g->back()->setRotationSpeed(-5.0);
-	g->push_back(restoreCommand);
+    g->push_back(restoreCommand);
 
-	g->push_back(saveCommand);
-	g->push_back(make_shared<SetLinewidth>(2.0 * scale));
-	g->push_back(make_shared<RadialLinesPart>(42 * scale, 4 * scale, 6, 220, 280));
+    g->push_back(saveCommand);
+    g->push_back(make_shared<SetLinewidth>(2.0 * scale));
+    g->push_back(make_shared<RadialLinesPart>(42 * scale, 4 * scale, 6, 220, 280));
     g->back()->setDisplayState(IPart::DisplayCritical);
-	g->push_back(restoreCommand);
+    g->push_back(restoreCommand);
 
-	g->push_back(make_shared<CustomFn>(custom));
-    
-	return g;
+    g->push_back(make_shared<CustomFn>(custom));
+    return g;
 }
-
 
 
 //=============================================================================
 // App
 //=============================================================================
 
-class ShadersApp : public ZugsterApp {
+class ShadersApp : public AppNative {
   public:
-	void setup();
-	void prepareSettings(Settings *settings);
-	void mouseDown( MouseEvent event );	
-	void keyDown(KeyEvent event);
-	void doUpdate();
-	void doDraw();
+    void setup();
+    void mouseDown( MouseEvent event );
+    void keyDown(KeyEvent event);
+    void resize();
+    void update();
+    void draw();
 
   private:
     void render_framebuffer_shaded();
     void draw_shaded();
     void draw_plain();
-    
+
     /** Definition of the UI gizmo to draw */
     GizmoRef        m_gizmo;
     /** Framebuffer to render the gizmo into */
@@ -144,37 +140,42 @@ class ShadersApp : public ZugsterApp {
 
 void ShadersApp::setup()
 {
+    setWindowSize( WIDTH, HEIGHT );
+    setFrameRate(  30.0f );
+    getWindow()->setTitle("Shader Test");
+
+
 #if MOVIE
-	setupMovie(600);
-	startMovie();
+    setupMovie(600);
+    startMovie();
 #endif
 
     m_format.enableMipmapping(false);
     m_format.setCoverageSamples(16);
     m_format.setSamples(4);
-    
+
     m_bDrawShaded        = true;
-	m_gizmo              = make_gizmo( WIDTH / 2, HEIGHT / 2, 4.0 );
+    m_gizmo              = make_gizmo( WIDTH / 2, HEIGHT / 2, 4.0 );
     m_framebuffer        = gl::Fbo(WIDTH, HEIGHT, m_format);
     m_framebuffer_shaded = gl::Fbo(WIDTH, HEIGHT, m_format);
- 
+
 #if 0
-    //	write_xml(cinder::getDocumentsDirectory() + "/gizmo.xml", m_gizmo);
-	try {
-		m_gizmo = read_xml(cinder::getDocumentsDirectory() + "/gizmo.xml");
-	} catch ( const std::exception &ex ) {
-		std::cerr << "Failed to load gizmo: " << ex.what() << std::endl;
-	}
+    // write_xml(cinder::getDocumentsDirectory() + "/gizmo.xml", m_gizmo);
+    try {
+        m_gizmo = read_xml(cinder::getDocumentsDirectory() + "/gizmo.xml");
+    } catch ( const std::exception &ex ) {
+        std::cerr << "Failed to load gizmo: " << ex.what() << std::endl;
+    }
 #endif
-    
+
     try {
 //        m_shader = gl::GlslProg(loadResource("v002.AnalogGlitch.vert"),
 //                                loadResource("v002.AnalogGlitch.frag"));
 //                m_shader = gl::GlslProg(loadResource("v002.blur.vert"),
 //                                        loadResource("v002.blur.frag"));
 #ifdef _WIN32
-                m_shader = gl::GlslProg(loadFile("passThru_vert.glsl"),
-                                        loadFile("gaussianBlur_frag.glsl"));
+        m_shader = gl::GlslProg(loadFile("passThru_vert.glsl"),
+                                loadFile("gaussianBlur_frag.glsl"));
 #else
         m_shader = gl::GlslProg(loadResource("passThru_vert.glsl"),
                                 loadResource("gaussianBlur_frag.glsl"));
@@ -184,73 +185,79 @@ void ShadersApp::setup()
     }
 }
 
-void ShadersApp::prepareSettings(Settings *settings)
-{
-	settings->setWindowSize( WIDTH, HEIGHT );
-	settings->setFrameRate(  30.0f );    
-	settings->setTitle("Shader Test");
-}
-
 void ShadersApp::mouseDown( MouseEvent event )
 {
 }
 
-void ShadersApp::keyDown(KeyEvent event)
+void ShadersApp::keyDown( KeyEvent event )
 {
     if ( event.getChar() == 'g' )
         m_bDrawShaded = !m_bDrawShaded;
 }
 
-void ShadersApp::doUpdate()
+void ShadersApp::resize()
 {
-	if ( m_gizmo )
-	{
-		m_gizmo->updateGizmo();
-		zugster::gizmo::render_to_framebuffer(m_framebuffer, m_gizmo);
-	}
+    int width = getWindowWidth();
+    int height = getWindowHeight();
+    m_gizmo              = make_gizmo( width / 2, height / 2, 4.0 );
+    m_framebuffer        = gl::Fbo(width, height, m_format);
+    m_framebuffer_shaded = gl::Fbo(width, height, m_format);
+    update();
 }
 
-void ShadersApp::render_framebuffer_shaded()
+void ShadersApp::update()
 {
-	m_shader.bind();
-	m_shader.uniform( "tex0", 0 );
-	m_shader.uniform( "sampleOffset", Vec2f( cos( .0 ), 
-                                            sin( .0 ) ) * ( 1.0f / getWindowWidth() ) );
+    if ( m_gizmo )
+    {
+        m_gizmo->updateGizmo();
+        cinderpane::gizmo::render_to_framebuffer(m_framebuffer, m_gizmo);
+    }
 
-	zugster::cinderpane::render_shader(m_shader, m_framebuffer, m_framebuffer_shaded);
 }
 
-void ShadersApp::draw_plain()
-{
-	gl::clear( ColorA( 1.0, 0.0, 0.0, 1.0 ) );
-	gl::pushMatrices();
-	gl::setMatricesWindow(WIDTH, HEIGHT, false );
-    gl::draw( m_framebuffer.getTexture() );
-	gl::popMatrices();
-}
-
-void ShadersApp::draw_shaded()
-{    
-    gl::enableAdditiveBlending();
-    gl::color( Color::white() );
-    gl::draw( m_framebuffer_shaded.getTexture() );
-    gl::disableAlphaBlending();     
-}
-
-void ShadersApp::doDraw()
+void ShadersApp::draw()
 {
     if ( !m_gizmo || !m_framebuffer )
-        return;   
+        return;
 
-	gl::setViewport( getWindowBounds() );
+    gl::setViewport( getWindowBounds() );
 
     draw_plain();
-    
+
     if ( m_bDrawShaded )
     {
         render_framebuffer_shaded();
         draw_shaded();
     }
+
 }
 
-CINDER_APP_BASIC( ShadersApp, RendererGl );
+void ShadersApp::render_framebuffer_shaded()
+{
+    m_shader.bind();
+    m_shader.uniform( "tex0", 0 );
+    m_shader.uniform( "sampleOffset", Vec2f( cos( .0 ),
+                                             sin( .0 ) ) * ( 1.0f / getWindowWidth() ) );
+
+    cinderpane::core::render_shader(m_shader, m_framebuffer, m_framebuffer_shaded);
+}
+
+void ShadersApp::draw_plain()
+{
+    gl::clear( ColorA( 1.0, 0.0, 0.0, 1.0 ) );
+    gl::pushMatrices();
+    gl::setMatricesWindow(getWindowWidth(), getWindowHeight(), false );
+    gl::draw( m_framebuffer.getTexture() );
+    gl::popMatrices();
+}
+
+void ShadersApp::draw_shaded()
+{
+    gl::enableAdditiveBlending();
+    gl::color( Color::white() );
+    gl::draw( m_framebuffer_shaded.getTexture() );
+    gl::disableAlphaBlending();
+}
+
+
+CINDER_APP_NATIVE( ShadersApp, RendererGl )
