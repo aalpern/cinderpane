@@ -83,6 +83,11 @@ namespace cinderpane {
             CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDown);
         }
 
+        virtual bool onMouseDrag( cinder::app::MouseEvent event )
+        {
+            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDrag);
+        }
+
         virtual bool onMouseUp( cinder::app::MouseEvent event )
         {
             CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseUp);
@@ -96,11 +101,6 @@ namespace cinderpane {
         virtual bool onMouseMove( cinder::app::MouseEvent event )
         {
             CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseMove);
-        }
-
-        virtual bool onMouseDrag( cinder::app::MouseEvent event )
-        {
-            CINDERPANE_DISPATCH_POSITIONAL_EVENT(mouse_container, m_mice, onMouseDrag);
         }
 
         virtual bool onKeyDown( cinder::app::KeyEvent event )
