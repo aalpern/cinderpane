@@ -170,6 +170,8 @@ namespace cinderpane {
             m_framebuffer        = cinder::gl::Fbo(app->getWindowWidth(), app->getWindowHeight(), m_format);
             m_framebuffer_shaded = cinder::gl::Fbo(app->getWindowWidth(), app->getWindowHeight(), m_format);
 
+            /*
+             TODO: events have change in cinder 0.8.5
             app->registerKeyDown(      this,          &Interface::onKeyDown);
             app->registerResize(       this,          &Interface::onResize);
             app->registerMouseDown(    &m_dispatcher, &EventDispatcher::onMouseDown);
@@ -182,7 +184,8 @@ namespace cinderpane {
             app->registerTouchesBegan( &m_dispatcher, &EventDispatcher::onTouchesBegan);
             app->registerTouchesMoved( &m_dispatcher, &EventDispatcher::onTouchesMoved);
             app->registerTouchesEnded( &m_dispatcher, &EventDispatcher::onTouchesEnded);
-
+*/
+            
             try {
 #ifdef _WIN32
                 m_glow_shader = cinder::gl::GlslProg(cinder::loadFile("passThru_vert.glsl"),
@@ -196,10 +199,13 @@ namespace cinderpane {
             }
         }
 
+        /*
+         TODO: Gone or moved in cinder 0.8.5?
         bool onResize(cinder::app::ResizeEvent event)
         {
             return false;
         }
+         */
 
         void update()
         {
