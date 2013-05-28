@@ -133,8 +133,7 @@ namespace cinderpane {
                         rect.y2 + yValue);
     }
 
-    //=============================================================================
-
+    /** Parse a vector from a comma delimited string of numbers. */
     template<typename T>
     cinder::Vec2<T> parse_vec2(const std::string &str)
     {
@@ -156,6 +155,7 @@ namespace cinderpane {
         return v;
     }
 
+    /** Parse a color from a comma delimited string of RGBA values */
     cinder::ColorA parse_colorA(const std::string &str, const cinder::ColorA &defaultValue = cinder::ColorA(0.5, 0.5, 0.5, 0.5))
     {
         std::vector<std::string> parts;
