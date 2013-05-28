@@ -79,31 +79,34 @@ namespace cinderpane {
             return m_state;
         }
 
-        virtual void setDisplayState(IPart::DisplayState value)
+        virtual IPart* setDisplayState(IPart::DisplayState value)
         {
             m_state = value;
+            return this;
         }
 
         /// @name Rotation
         /// @{
 
         /** Rotate the part by an increment */
-        virtual void rotate(double increment)
+        virtual IPart* rotate(double increment)
         {
             double oldRotation = m_rotation;
             m_rotation = cinderpane::ext::rotate_degrees(m_rotation, increment);
             onRotationChanged(m_rotation, oldRotation);
+            return this;
         }
 
         /** Set the absolute rotation of the part */
-        virtual void setRotation(double rotation)
+        virtual IPart* setRotation(double rotation)
         {
             if ( rotation == m_rotation )
-                return;
+                return this;
 
             double oldRotation = m_rotation;
             m_rotation = rotation;
             onRotationChanged(m_rotation, oldRotation);
+            return this;
         }
 
         /** Get the current absolute rotation of the part */
@@ -113,11 +116,12 @@ namespace cinderpane {
         }
 
         /** Set the auto-rotation speed in RPM */
-        virtual void setRotationSpeed(double rpm)
+        virtual IPart* setRotationSpeed(double rpm)
         {
             m_rotationSpeedRPM = rpm;
             double rotationsPerSecond = rpm / 60.0;
             m_rotationIncrementPerFrame = ( rotationsPerSecond / cinder::app::getFrameRate() ) * 360.0;
+            return this;
         }
 
         /** Get the current auto-rotation speed */
@@ -132,9 +136,10 @@ namespace cinderpane {
         /// @{
 
         /** Set whether the part should be outlined when rendered */
-        virtual void setOutline(bool value)
+        virtual IPart* setOutline(bool value)
         {
             m_outline = value;
+            return this;
         }
 
         /** Get the current outline render setting */
@@ -144,9 +149,10 @@ namespace cinderpane {
         }
 
         /** Set whether the part should be filled when rendered */
-        virtual void setFilled(bool value)
+        virtual IPart* setFilled(bool value)
         {
             m_fill = value;
+            return this;
         }
 
         /** Get the current fill render setting */

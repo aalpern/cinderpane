@@ -417,17 +417,19 @@ GizmoRef make_framistat(float scale = 2.5)
     g->push_back(make_shared<GradientCirclePart>( 12 * scale, 12 * scale, trans, ColorA(1.0, 1.0, 1.0, 1.0)));
     g->push_back(make_shared<ArcPart>(36 * scale, 4 * scale, 45, 180));
     g->push_back(make_shared<FilledArcPart>(44 * scale, 20 * scale, 330, 30));
-    g->back()->setDisplayState(IPart::DisplayWarning);
-    g->back()->setRotationSpeed(5.0);
+    g->back()
+        ->setDisplayState(IPart::DisplayWarning)
+        ->setRotationSpeed(5.0);
 
     g->push_back(saveCommand);
     g->push_back(make_shared<SetLinewidth>(1.5));
     g->push_back(make_shared<SetLinecolor>(ColorA(0.4, 0.4, 0.4, 0.2)));
     g->push_back(make_shared<SetFillcolor>(ColorA(0.2, 0.2, 0.2, 0.2)));
     g->push_back(make_shared<SegmentedFilledArcPart>(22 * scale, 8 * scale, 6, 15));
-    g->back()->setDisplayState(IPart::DisplaySecondary);
-    g->back()->setFilled(false);
-    g->back()->setRotationSpeed(-5.0);
+    g->back()
+        ->setDisplayState(IPart::DisplaySecondary)
+        ->setFilled(false)
+        ->setRotationSpeed(-5.0);
     g->push_back(restoreCommand);
 
     g->push_back(saveCommand);

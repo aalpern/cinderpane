@@ -53,22 +53,22 @@ namespace cinderpane {
 
         virtual DisplayState getDisplayState() const = 0;
 
-        virtual void setDisplayState(DisplayState value) = 0;
+        virtual IPart* setDisplayState(DisplayState value) = 0;
 
         /// @name Rotation
         /// @{
 
         /** Rotate the part by an increment */
-        virtual void   rotate(double increment) = 0;
+        virtual IPart* rotate(double increment) = 0;
 
         /** Set the absolute rotation of the part */
-        virtual void   setRotation(double rotation) = 0;
+        virtual IPart* setRotation(double rotation) = 0;
 
         /** Get the current absolute rotation of the part */
         virtual double getRotation() const = 0;
 
         /** Set the auto-rotation speed in RPM */
-        virtual void   setRotationSpeed(double rpm) = 0;
+        virtual IPart* setRotationSpeed(double rpm) = 0;
 
         /** Get the current auto-rotation speed */
         virtual double getRotationSpeed() const = 0;
@@ -79,13 +79,13 @@ namespace cinderpane {
         /// @{
 
         /** Set whether the part should be outlined when rendered */
-        virtual void   setOutline(bool value) = 0;
+        virtual IPart* setOutline(bool value) = 0;
 
         /** Get the current outline render setting */
         virtual bool   isOutlined() const = 0;
 
         /** Set whether the part should be filled when rendered */
-        virtual void   setFilled(bool value) = 0;
+        virtual IPart* setFilled(bool value) = 0;
 
         /** Get the current fill render setting */
         virtual bool   isFilled() const = 0;

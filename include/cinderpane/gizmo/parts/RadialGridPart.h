@@ -48,10 +48,11 @@ namespace cinderpane {
             m_lines.renderGizmo(context);
         }
 
-        virtual void setDisplayState(DisplayState state)
+        virtual IPart* setDisplayState(DisplayState state)
         {
             PartBase::setDisplayState(state);
             m_lines.setDisplayState(state);
+            return this;
         }
 
         virtual void loadXML(const cinder::XmlTree &element,

@@ -35,15 +35,15 @@ namespace cinderpane {
         /// @name IPart stub interface
         /// @{
         virtual IPart::DisplayState getDisplayState() const { return DisplayNormal; }
-        virtual void   setDisplayState(IPart::DisplayState value) {}
-        virtual void   rotate(double increment) { }
-        virtual void   setRotation(double rotation) { }
+        virtual IPart* setDisplayState(IPart::DisplayState value) { return this; }
+        virtual IPart* rotate(double increment) { return this; }
+        virtual IPart* setRotation(double rotation) { return this; }
         virtual double getRotation() const { return 0.0; }
-        virtual void   setRotationSpeed(double rpm) { }
+        virtual IPart* setRotationSpeed(double rpm) { return this; }
         virtual double getRotationSpeed() const { return 0.0; }
-        virtual void   setOutline(bool value) { }
+        virtual IPart* setOutline(bool value) { return this; }
         virtual bool   isOutlined() const { return false; }
-        virtual void   setFilled(bool value) { }
+        virtual IPart* setFilled(bool value) { return this; }
         virtual bool   isFilled() const { return false; }
         /// @}
 

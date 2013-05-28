@@ -28,12 +28,13 @@ namespace cinderpane {
 
         virtual ~CompositePart() {}
 
-        virtual void setDisplayState(DisplayState state)
+        virtual IPart* setDisplayState(DisplayState state)
         {
             PartBase::setDisplayState(state);
             for ( auto part : m_parts )  {
                 part->setDisplayState(state);
             }
+            return this;
         }
 
         /// @name IRenderable
@@ -80,9 +81,9 @@ namespace cinderpane {
         }
         /// @}
 
-        CINDERPANE_DELEGATE_VECTOR(PartVector, m_parts)
+        CINDERPANE_DELEGATE_VECTOR(PartVector, m_parts);
 
-        protected:
+      protected:
         container_type m_parts;
     };
     typedef shared_ptr<CompositePart> CompositePartRef;
