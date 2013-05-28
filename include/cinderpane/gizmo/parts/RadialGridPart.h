@@ -55,26 +55,6 @@ namespace cinderpane {
             return this;
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            m_circleSpacing = xmlGetChildValue<float>(element, "CircleSpacing", m_circleSpacing);
-            m_circleCount = xmlGetChildValue<int>(element, "CircleCount", m_circleCount);
-            m_lines.setLineCount( xmlGetChildValue<int>(element, "LineCount", m_lines.getLineCount()) );
-            m_lines.setRotation(m_rotation);
-            m_lines.setRotationSpeed(m_rotationSpeedRPM);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "RadialGrid");
-            xmlWriteTag(os, "CircleSpacing", m_circleSpacing);
-            xmlWriteTag(os, "CircleCount", m_circleCount);
-            xmlWriteTag(os, "LineCount", m_lines.getLineCount());
-            xmlEndTag(os, "RadialGrid");
-        }
-
       protected:
         virtual void onRotationChanged(double rotation, double oldRotation)
         {

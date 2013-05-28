@@ -162,22 +162,6 @@ namespace cinderpane {
         }
         /// @}
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            m_rotation = element.getAttributeValue("rotation", 0.0);
-            m_rotationSpeedRPM = element.getAttributeValue("rotationSpeed", 0.0);
-            m_fill     = element.getAttributeValue("fill", false);
-            m_outline  = element.getAttributeValue("outline", true);
-            m_visible  = element.getAttributeValue("visible", true);
-            m_position
-                = cinderpane::ext::parse_vec2<double>(
-                    element.getAttributeValue<std::string>("position", "0,0"));
-            m_size
-                = cinderpane::ext::parse_vec2<double>(
-                    element.getAttributeValue<std::string>("size", "0,0"));
-        }
-
       protected:
         /** Handler function for updating after a rotation */
         virtual void onRotationChanged(double rotation, double oldRotation) {}
@@ -196,19 +180,6 @@ namespace cinderpane {
         double rotate_value(double value)
         {
             return cinderpane::ext::rotate_degrees(value, m_rotation);
-        }
-
-        std::ostream& xmlBeginPart(std::ostream &os, const std::string &tagname) const
-        {
-            return os << "<" << tagname
-                      << " position=\"" << m_position.x << "," << m_position.y << "\""
-                      << " size=\"" << m_size.x << "," << m_size.y << "\""
-                      << " fill=\"" << m_fill << "\""
-                      << " outline=\"" << m_outline << "\""
-                      << " visible=\"" << m_visible << "\""
-                      << " rotation=\"" << m_rotation << "\""
-                      << " rotationSpeed=\"" << m_rotationSpeedRPM << "\""
-                      << ">" << std::endl;
         }
 
         //=============================================================================

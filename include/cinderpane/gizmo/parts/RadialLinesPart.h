@@ -75,27 +75,6 @@ namespace cinderpane {
             context.draw(true, false, m_state);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            m_beginDegrees = xmlGetChildValue<float>(element, "BeginDegrees",  0.0);
-            m_endDegrees   = xmlGetChildValue<float>(element, "EndDegrees",  180.0);
-            m_lineCount    = xmlGetChildValue<int>(  element, "LineCount",    12);
-            m_lineLength   = xmlGetChildValue<float>(element, "LineLength",    8.0);
-            Calculate();
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "RadialLines");
-            xmlWriteTag(os, "BeginDegrees", m_beginDegrees);
-            xmlWriteTag(os, "EndDegrees",   m_endDegrees);
-            xmlWriteTag(os, "LineCount",    m_lineCount);
-            xmlWriteTag(os, "LineLength",   m_lineLength);
-            xmlEndTag(os, "RadialLines");
-        }
-
       protected:
         void Calculate()
         {

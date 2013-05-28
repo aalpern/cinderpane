@@ -49,17 +49,6 @@ namespace cinderpane {
 #endif
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "RectangularReticle");
-            xmlEndTag(os, "RectangularReticle");
-        }
-
       private:
         float m_length;
     };

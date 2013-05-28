@@ -23,21 +23,6 @@ namespace cinderpane {
             s << std::setprecision(2) << cinder::app::App::get()->getAverageFps();
             setText(s.str());
         }
-
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            TextPart::loadXML(element, factory);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Framerate");
-            xmlWriteTag(os, "Text", m_text);
-            xmlWriteTag(os, "FontSize", m_fontSize);
-            xmlEndTag(os, "Framerate");
-        }
-
     };
 
   }

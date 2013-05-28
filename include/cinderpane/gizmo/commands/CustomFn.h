@@ -22,15 +22,6 @@ namespace cinderpane {
             m_fn(ctx);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-        }
-
       private:
         function_type m_fn;
     };

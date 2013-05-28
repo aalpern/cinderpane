@@ -159,15 +159,6 @@ void ShadersApp::setup()
     m_framebuffer        = gl::Fbo(WIDTH, HEIGHT, m_format);
     m_framebuffer_shaded = gl::Fbo(WIDTH, HEIGHT, m_format);
 
-#if 0
-    // write_xml(cinder::getDocumentsDirectory() + "/gizmo.xml", m_gizmo);
-    try {
-        m_gizmo = read_xml(cinder::getDocumentsDirectory() + "/gizmo.xml");
-    } catch ( const std::exception &ex ) {
-        std::cerr << "Failed to load gizmo: " << ex.what() << std::endl;
-    }
-#endif
-
     try {
 //        m_shader = gl::GlslProg(loadResource("v002.AnalogGlitch.vert"),
 //                                loadResource("v002.AnalogGlitch.frag"));

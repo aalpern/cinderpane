@@ -46,53 +46,6 @@ namespace cinderpane {
         virtual IPart* setFilled(bool value) { return this; }
         virtual bool   isFilled() const { return false; }
         /// @}
-
-      protected:
-        //=============================================================================
-        /// @name XML Utilities for implementing IPersistable
-        /// @{
-        //=============================================================================
-
-        std::ostream& xmlBeginTag(std::ostream &os, const std::string &tagname) const
-        {
-            return os << "<" << tagname << ">";
-        }
-
-        std::ostream& xmlEndTag(std::ostream &os, const std::string &tagname) const
-        {
-            return os << "</" << tagname << ">" << std::endl;
-        }
-
-        template<typename T>
-        std::ostream& xmlWriteTag(std::ostream &os, const std::string &tagname, const T &value) const
-        {
-            return os << "<" << tagname << ">"
-                      << value
-                      << "</" << tagname << ">" << std::endl;
-        }
-
-        std::ostream& xmlWriteTag(std::ostream &os, const std::string &tagname, const ColorA &value) const
-        {
-            os << "<" << tagname << ">";
-            return cinderpane::ext::write_color(os, value)
-                << "</" << tagname << ">" << std::endl;
-        }
-
-        std::ostream& xmlWriteTag(std::ostream &os, const std::string &tagname) const
-        {
-            return os << "<" << tagname << "/>" << std::endl;
-        }
-
-        template<typename T>
-        T xmlGetChildValue(const cinder::XmlTree &element, const std::string &childName, const T &defaultValue)
-        {
-            T value = defaultValue;
-            if ( element.hasChild(childName) )
-                value = element.getChild(childName).getValue<T>(defaultValue);
-            return value;
-        }
-
-        /// @}
     };
   }
 }

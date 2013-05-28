@@ -36,18 +36,6 @@ namespace cinderpane {
             context.Cairo.circle(context.Position + m_position, m_size.x / 2);
             context.draw(m_outline, m_fill, m_state);
         }
-
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Circle");
-            xmlEndTag(os, "Circle");
-        }
     };
 
   }

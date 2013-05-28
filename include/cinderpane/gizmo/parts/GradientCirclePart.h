@@ -57,30 +57,6 @@ namespace cinderpane {
             context.Cairo.fill();
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            try {
-                m_outercolor = cinderpane::ext::parse_colorA(element.getChild("OuterColor").getValue());
-            } catch ( ... ) {}
-            try {
-                m_innercolor = cinderpane::ext::parse_colorA(element.getChild("InnerColor").getValue());
-            } catch ( ... ) {}
-            try {
-                m_gradientWidth = xmlGetChildValue(element, "GradientWidth", m_gradientWidth);
-            } catch ( ... ) {}
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "GradientCircle");
-            xmlWriteTag(os, "OuterColor", m_outercolor);
-            xmlWriteTag(os, "InnerColor", m_innercolor);
-            xmlWriteTag(os, "GradientWidth", m_gradientWidth);
-            xmlEndTag(os, "GradientCircle");
-        }
-
       private:
         float m_gradientWidth;
         cinder::ColorA m_outercolor;

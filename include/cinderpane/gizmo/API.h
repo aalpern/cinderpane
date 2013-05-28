@@ -43,21 +43,6 @@ namespace cinderpane {
 
         return factory;
     }
-
-    void write_xml(const std::string &path, GizmoRef gizmo)
-    {
-        std::ofstream s(path.c_str());
-        gizmo->storeXML(s);
-        s.close();
-    }
-
-    GizmoRef read_xml(const std::string &path)
-    {
-        cinder::XmlTree doc( cinder::loadFile(path) );
-        GizmoRef gizmo = make_shared<Gizmo>();
-        gizmo->loadXML(doc, make_part_factory());
-        return gizmo;
-    }
   }
 }
 

@@ -33,13 +33,6 @@ namespace cinderpane {
             base_type::renderGizmo(context);
             context.restore();
         }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Gizmo");
-            base_type::storeXML(os);
-            xmlEndTag(os, "Gizmo");
-        }
     };
     typedef shared_ptr<Gizmo> GizmoRef;
 

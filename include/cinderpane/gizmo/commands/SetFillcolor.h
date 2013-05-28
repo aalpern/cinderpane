@@ -28,17 +28,6 @@ namespace cinderpane {
             ctx.FillColor = m_fillcolor;
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            m_fillcolor = cinderpane::ext::parse_colorA(element.getValue(), m_fillcolor);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlWriteTag(os, "SetFillColor", m_fillcolor);
-        }
-
       protected:
         ColorA m_fillcolor;
     };

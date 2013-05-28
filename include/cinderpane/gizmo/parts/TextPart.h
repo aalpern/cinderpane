@@ -66,22 +66,6 @@ namespace cinderpane {
             context.Cairo.restore();
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            m_text = xmlGetChildValue<std::string>(element, "Text", "????");
-            m_fontSize = xmlGetChildValue<double>(element, "FontSize", 12.0);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Text");
-            xmlWriteTag(os, "Text", m_text);
-            xmlWriteTag(os, "FontSize", m_fontSize);
-            xmlEndTag(os, "Text");
-        }
-
       protected:
         std::string m_text;
         std::string m_fontName;

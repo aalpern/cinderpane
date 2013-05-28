@@ -44,22 +44,6 @@ namespace cinderpane {
             m_part->renderGizmo(ctx);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            const cinder::XmlTree &child = *(element.getChildren().front()).get();
-            m_part = factory->makePart(child.getTag());
-            m_part->loadXML(child, factory);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Perimeter");
-            m_part->storeXML(os);
-            xmlEndTag(os, "Perimeter");
-        }
-
       protected:
         virtual void onRotationChanged(double rotation, double oldRotation)
         {

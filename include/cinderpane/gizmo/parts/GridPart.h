@@ -141,24 +141,6 @@ namespace cinderpane {
         }
         /// @}
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            m_hdivisions = xmlGetChildValue<int>(element, "HDiv", 4);
-            m_vdivisions = xmlGetChildValue<int>(element, "VDiv", 4);
-            m_type       = toType(xmlGetChildValue<std::string>(element, "Type", "rectangle").c_str());
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Grid");
-            xmlWriteTag(os, "HDiv", m_hdivisions);
-            xmlWriteTag(os, "VDiv", m_vdivisions);
-            xmlWriteTag(os, "Type", toString(m_type));
-            xmlEndTag(os, "Grid");
-        }
-
       protected:
         static const char * toString(RectangleType type)
         {

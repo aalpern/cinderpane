@@ -106,17 +106,6 @@ namespace cinderpane {
             context.draw(m_outline, m_fill, m_state);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "Rectangle");
-            xmlEndTag(os, "Rectangle");
-        }
       private:
         RectangleType m_type;
     };

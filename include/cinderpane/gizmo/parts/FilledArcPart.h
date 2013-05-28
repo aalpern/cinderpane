@@ -68,25 +68,6 @@ namespace cinderpane {
             context.draw(m_outline, m_fill, m_state);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            PartBase::loadXML(element, factory);
-            m_beginDegrees = xmlGetChildValue<float>(element, "BeginDegrees", 0.0f);
-            m_endDegrees   = xmlGetChildValue<float>(element, "EndDegrees", 360.0f);
-            m_arcWidth     = xmlGetChildValue<float>(element, "ArcWidth", 1.0f);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "FilledArc");
-            xmlWriteTag(os, "BeginDegrees", m_beginDegrees);
-            xmlWriteTag(os, "EndDegrees", m_endDegrees);
-            xmlWriteTag(os, "ArcWidth", m_arcWidth);
-            xmlEndTag(os, "FilledArc");
-        }
-
-
       protected:
         virtual void onRotationChanged(double rotation, double oldRotation)
         {

@@ -68,17 +68,6 @@ namespace cinderpane {
             ctx.draw(m_outline, m_fill, m_state);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "RegularPolygon");
-            xmlEndTag(os, "RegularPolygon");
-        }
-
       protected:
         int m_sideCount;
     };

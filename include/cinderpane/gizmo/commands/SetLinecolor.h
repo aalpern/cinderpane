@@ -32,17 +32,6 @@ namespace cinderpane {
             // }
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            m_lineColor = cinderpane::ext::parse_colorA(element.getValue(), m_lineColor);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlWriteTag(os, "SetLineColor", m_lineColor);
-        }
-
       protected:
         ColorA m_lineColor;
     };

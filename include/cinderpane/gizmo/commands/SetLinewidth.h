@@ -22,17 +22,6 @@ namespace cinderpane {
             ctx.Cairo.setLineWidth(m_lineWidth);
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            m_lineWidth = element.getValue<double>(m_lineWidth);
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlWriteTag(os, "SetLineWidth", m_lineWidth);
-        }
-
       protected:
         double m_lineWidth;
     };

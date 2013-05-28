@@ -56,22 +56,6 @@ namespace cinderpane {
             }
         }
 
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            m_segmentCount      = xmlGetChildValue<int>(element, "SegmentCount", 4);
-            m_segmentGapDegrees = xmlGetChildValue<double>(element, "SegmentGap", 45.0);
-            Calculate();
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            xmlBeginPart(os, "SegmentedArc");
-            xmlWriteTag(os, "SegmentCount", m_segmentCount);
-            xmlWriteTag(os, "SegmentGap", m_segmentGapDegrees);
-            xmlEndTag(os, "SegmentedArc");
-        }
-
       protected:
         void Calculate()
         {

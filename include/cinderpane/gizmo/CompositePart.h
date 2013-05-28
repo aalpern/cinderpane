@@ -61,26 +61,6 @@ namespace cinderpane {
         }
         /// @}
 
-        /// @name IPersistable
-        /// @{
-        virtual void loadXML(const cinder::XmlTree &element,
-                             const PartFactoryRef &factory)
-        {
-            for ( auto child : element ) {
-                PartRef part = factory->makePart(child.getTag());
-                part->loadXML(child, factory);
-                push_back(part);
-            }
-        }
-
-        virtual void storeXML(std::ostream &os) const
-        {
-            for ( auto part : m_parts ) {
-                part->storeXML(os);
-            }
-        }
-        /// @}
-
         CINDERPANE_DELEGATE_VECTOR(PartVector, m_parts);
 
       protected:
