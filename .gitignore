@@ -3,5 +3,4 @@ samples/*/xcode/build
 *.old
 *xcuserdata*
 *.DS_Store
-*.pch
 docs/html
